@@ -3,16 +3,17 @@ class Player:
 
     def __init__(self, name: str):
         self.name = name
-        self.played_game = 0
+        self.played_games = 0
         self.won_games = 0
 
-    def get__player_score(self):
-        print('Player:', self.name)
-        print('Amount of games:', self.played_game)
-        print('Amount of won games:', self.won_games)
+    def get_player_score(self):
+        score_info = f'Player:{self.name}'
+        score_info += f'Amount of games:{self.played_games}'
+        score_info += f'Amount of won games: {self.won_games}'
+        return score_info
 
     def add_game(self):
-        self.played_game += 1
+        self.played_games += 1
 
     def add_win(self):
         self.won_games += 1
