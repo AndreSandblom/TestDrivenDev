@@ -1,7 +1,5 @@
 import pickle
 from player import Player
-# Will contain the highscore, 2 functions- Show and set higscore
-
 
 def load_high_score(filename) -> list[Player]:
     try:
