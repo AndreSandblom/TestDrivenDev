@@ -7,9 +7,10 @@ class Player:
         self.won_games = 0
 
     def get_player_score(self):
-        print('Player:', self.name)
-        print('Amount of games:', self.played_games)
-        print('Amount of won games:', self.won_games)
+        score_info = f'Player:{self.name}'
+        score_info += f'Amount of games:{self.played_games}'
+        score_info += f'Amount of won games: {self.won_games}'
+        return score_info
 
     def add_game(self):
         self.played_games += 1
