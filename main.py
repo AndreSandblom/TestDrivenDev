@@ -1,6 +1,6 @@
 import os
 import sys
-#import Game
+import game
 
 def main():
     match(choose_main()):
@@ -9,14 +9,31 @@ def main():
             match(choose_mode()):
                 case "1":
                     #Single Player mode
+
                     name = input("Enter your name >>> ")
                     # player = Player(name)
-                    # game = Game(player)
+                    
+                    
+                    match(choose_difficulty()):
+                        case "1":
+                            # game = Game(player, Intelligence("easy"))
+                            pass
+                        case "2":
+                            # game = Game(player, Intelligence("normal"))
+                            pass
+                        case "3":
+                            # game = Game(player, Intelligence("hard"))
+                            pass
+                        case "4":
+                            main()
+                        
                     pass
                 case "2":
                     #Multiplayer mode
-                    # player1 = Player()
-                    # player2 = Player()
+                    name1 = input("Enter name for Player 1 >>> ")
+                    name2 = input("Enter name for Player 2 >>> ")
+                    # player1 = Player(name1)
+                    # player2 = Player(name2)
                     # game = Game(player1, player2)
                     pass
                 case "3":
@@ -81,6 +98,30 @@ def choose_mode():
         mode_choice = input("Choose a game mode option >>> ")
 
     return mode_choice
+
+def display_difficulty_menu():
+    clear_terminal()
+    print("-------------------------------")
+    print("|   SINGLE PLAYER DIFFICULTY  |")
+    print("-------------------------------")
+    print("|                             |")
+    print("|        1. Easy              |")
+    print("|        2. Normal            |")
+    print("|        3. Hard              |")
+    print("|        4. Go Back           |")
+    print("|                             |")
+    print("-------------------------------")
+    print()
+
+def choose_difficulty():
+    display_difficulty_menu()
+    difficulty_choice = input("Choose a game difficulty option >>> ")
+    valid_inputs = ["1", "2", "3", "4"]
+    while difficulty_choice not in valid_inputs:
+        validate_input(difficulty_choice, valid_inputs)
+        difficulty_choice = input("Choose a game difficulty option >>> ")
+
+    return difficulty_choice
 
 def clear_terminal():
     # For Windows
