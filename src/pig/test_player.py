@@ -1,15 +1,25 @@
+"""This module contains unit tests for the Player class.
+"""
 import unittest
 from player import Player
 
 
 class TestPlayer(unittest.TestCase):
+    """Test the Player class."""
 
     def setUp(self) -> None:
+        """Create two players for testing."""
         self.player1 = Player("Player1")
         self.player2 = Player("Player2")
 
     def tearDown(self) -> None:
+        """Clean up the players after testing."""
         return super().tearDown()
+
+    def test_player_instance(self):
+        """Test if the players are instances of the Player class."""
+        self.assertIsInstance(self.player1, Player)
+        self.assertIsInstance(self.player2, Player)
 
     def test_player_name(self):
         self.assertEqual(self.player1.name, "Player1")
