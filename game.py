@@ -29,11 +29,11 @@ class Game:
         elif player == self.player2:
             return self.score2
         else:
-            print("Invalid player") 
+            print("Invalid player")
 
     # A score adder that checks if there is a winner
     # If a winner is born, the function returns a dictionary
-    def increment_score(self, player, num_rolled):
+    def increment_and_determine(self, player, num_rolled):
         if player == self.player1:
             self.score1 += num_rolled
             if self.has_won(self.score1) is True:
