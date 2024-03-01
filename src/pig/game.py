@@ -10,10 +10,10 @@ class Game:
     def __init__(self, player1=None, player2=None):
         """Constructor for single and 2 player game."""
         if player1 is not None and player2 is not None:
-            self.player1 = Player(player1)
-            self.player2 = Player(player2)
+            self.player1 = player1
+            self.player2 = player2
         elif player1 is not None:
-            self.player1 = Player(player1)
+            self.player1 = player1
             # self.player2 = Intelligence()
         self.dice = Dice(6)
         self.winning_score = 100
@@ -28,14 +28,20 @@ class Game:
         """Computer decides if or not to roll a dice and an integer is returned."""
         pass # return self.intelligence.roll()                    
 
-    def get_score(self, player):
-        """Get the current score of the player."""
-        if player == self.player1.get_name():
-            return self.score1
-        elif player == self.player2.get_name():
-            return self.score2
-        else:
-            raise ValueError("Invalid player.")             # Need to handle error
+    # def get_score(self, player):
+    #     """Get the current score of the player."""
+    #     if player == self.player1.get_name():
+    #         return self.score1
+    #     elif player == self.player2.get_name():
+    #         return self.score2
+    #     else:
+    #         raise ValueError("Invalid player.")             # Need to handle error
+        
+    def get_score_1(self):
+        return self.score1
+    
+    def get_score_2(self):
+        return self.score2
 
     def increment_and_determine(self, player, num_rolled):
         """A score adder that checks if there is a winner,
