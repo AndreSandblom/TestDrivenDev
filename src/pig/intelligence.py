@@ -1,5 +1,5 @@
 from player import Player
-from dice import Dice1
+from dice import Dice
 
 class Intelligence(Player):
 
@@ -7,11 +7,11 @@ class Intelligence(Player):
         super().__init__(name)
         self.difficulty = difficulty
 
-    def play(game):
+    def play(self, game):
         turn_total = 0
 
         while True:
-            roll = Dice1.roll()
+            roll = Dice.roll()
             print(f"Computer rolled a {roll}!")
 
             match(roll):
