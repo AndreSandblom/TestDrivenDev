@@ -1,6 +1,8 @@
 import os
 import sys
-import game
+from game import Game
+from player import Player
+from intelligence import Intelligence
 
 def main():
     match(choose_main()):
@@ -11,30 +13,29 @@ def main():
                     #Single Player mode
 
                     name = input("Enter your name >>> ")
-                    # player = Player(name)
-                    
+                    player = Player(name)
                     
                     match(choose_difficulty()):
                         case "1":
-                            # game = Game(player, Intelligence("easy"))
+                            game = Game(player, Intelligence("easy"))
                             pass
                         case "2":
-                            # game = Game(player, Intelligence("normal"))
+                            game = Game(player, Intelligence("normal"))
                             pass
                         case "3":
-                            # game = Game(player, Intelligence("hard"))
+                            game = Game(player, Intelligence("hard"))
                             pass
                         case "4":
                             main()
                         
-                    pass
                 case "2":
                     #Multiplayer mode
                     name1 = input("Enter name for Player 1 >>> ")
                     name2 = input("Enter name for Player 2 >>> ")
-                    # player1 = Player(name1)
-                    # player2 = Player(name2)
-                    # game = Game(player1, player2)
+                    player1 = Player(name1)
+                    player2 = Player(name2)
+                    game = Game(player1, player2)
+                    # game.start()
                     pass
                 case "3":
                     main()
