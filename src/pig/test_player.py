@@ -16,6 +16,11 @@ class TestPlayer(unittest.TestCase):
         self.assertIsInstance(self.player1, Player)
         self.assertIsInstance(self.player2, Player)
 
+    def test_player_str(self):
+        """Test if the players have the correct string representation."""
+        self.assertEqual(str(self.player1), "Player: Player1")
+        self.assertEqual(str(self.player2), "Player: Player2")
+
     def test_player_name(self):
         """Test if the players have the correct names."""
         self.assertEqual(self.player1.name, "Player1")

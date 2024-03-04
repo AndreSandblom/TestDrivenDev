@@ -1,20 +1,23 @@
+"""Main module for the game PIG"""
 import os
 import sys
 from game import Game
 from player import Player
 from intelligence import Intelligence
 
+
 def main():
+    """Main function for the game PIG."""
     match(choose_main()):
         case "1":
-            #Choose game mode: Single Player or Multiplayer
+            # Choose game mode: Single Player or Multiplayer
             match(choose_mode()):
                 case "1":
-                    #Single Player mode
+                    # Single Player mode
 
                     name = input("Enter your name >>> ")
                     player = Player(name)
-                    
+
                     match(choose_difficulty()):
                         case "1":
                             game = Game(player, Intelligence("easy"))
@@ -27,9 +30,9 @@ def main():
                             pass
                         case "4":
                             main()
-                        
+
                 case "2":
-                    #Multiplayer mode
+                    # Multiplayer mode
                     name1 = input("Enter name for Player 1 >>> ")
                     name2 = input("Enter name for Player 2 >>> ")
                     player1 = Player(name1)
@@ -40,20 +43,21 @@ def main():
                 case "3":
                     main()
         case "2":
-            #Display Rules
+            # Display Rules
             display_rules()
             back = input()
             if back == "" or back != "":
                 main()
         case "3":
-            #Show High Scores
+            # Show High Scores
             pass
         case "4":
-            #Exit Game
+            # Exit Game
             exit_game()
-                
+
 
 def display_main_menu():
+    """Display the main menu of the game."""
     clear_terminal()
     print("-------------------------------")
     print("|             PIG             |")
@@ -67,7 +71,9 @@ def display_main_menu():
     print("-------------------------------")
     print()
 
+
 def choose_main():
+    """Choose an option from the main menu."""
     display_main_menu()
     menu_choice = input("Choose an option >>> ")
     valid_inputs = ["1", "2", "3", "4"]
@@ -77,7 +83,9 @@ def choose_main():
 
     return menu_choice
 
+
 def display_mode_menu():
+    """Display the game mode menu."""
     clear_terminal()
     print("-------------------------------")
     print("|          GAME MODE          |")
@@ -90,7 +98,9 @@ def display_mode_menu():
     print("-------------------------------")
     print()
 
+
 def choose_mode():
+    """Choose a game mode."""
     display_mode_menu()
     mode_choice = input("Choose a game mode option >>> ")
     valid_inputs = ["1", "2", "3"]
@@ -100,7 +110,9 @@ def choose_mode():
 
     return mode_choice
 
+
 def display_difficulty_menu():
+    """Display the single player difficulty menu."""
     clear_terminal()
     print("-------------------------------")
     print("|   SINGLE PLAYER DIFFICULTY  |")
@@ -114,7 +126,9 @@ def display_difficulty_menu():
     print("-------------------------------")
     print()
 
+
 def choose_difficulty():
+    """"Choose a difficulty level for the single player mode."""
     display_difficulty_menu()
     difficulty_choice = input("Choose a game difficulty option >>> ")
     valid_inputs = ["1", "2", "3", "4"]
@@ -124,7 +138,9 @@ def choose_difficulty():
 
     return difficulty_choice
 
+
 def clear_terminal():
+    """Clear the terminal."""
     # For Windows
     if os.name == 'nt':
         _ = os.system('cls')
@@ -132,25 +148,32 @@ def clear_terminal():
     else:
         _ = os.system('clear')
 
+
 def exit_game():
-        clear_terminal()
-        print("-------------------------------")
-        print("|  Thank you for playing PIG! |")
-        print("|             Bye!            |")
-        print("-------------------------------")
-        sys.exit()
+    """Exit the game."""
+    clear_terminal()
+    print("-------------------------------")
+    print("|  Thank you for playing PIG! |")
+    print("|             Bye!            |")
+    print("-------------------------------")
+    sys.exit()
+
 
 def validate_input(unchecked_input, valid_inputs):
+    """Validate the input from the user."""
     try:
         input = unchecked_input
         if input not in valid_inputs:
             raise ValueError
     except ValueError:
-        print(f"Invalid option. Choose a number from {valid_inputs[0]} to {valid_inputs[-1]}.")
-    
+        print("Invalid option. Choose a number from "
+              f"{valid_inputs[0]} to {valid_inputs[-1]}.")
+
     return input
 
+
 def display_rules():
+    """Display the rules of the game."""
     clear_terminal()
     print("-------------------------------------------------------------")
     print("|                           RULES                           |")

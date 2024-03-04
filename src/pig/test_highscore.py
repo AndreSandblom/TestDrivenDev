@@ -13,6 +13,8 @@ class TestHighscore(unittest.TestCase):
         self.player_list = [Player('Nisse'), Player('Stina')]
         self.path_name = 'test.file'
         self.test_file = Highscore(self.path_name)
+        self.player1 = Player("Player1")
+        self.player2 = Player("Player2")
 
     def tearDown(self):
         """Remove the test file."""
@@ -38,6 +40,15 @@ class TestHighscore(unittest.TestCase):
             pass
         test = self.test_file.load_highscore()
         self.assertEqual(test, [])
+
+    def test_sort_player_highscore(self):
+        """Test sort_player_highscore method"""
+        test_list1 = [self.player1, self.player2]
+        self.player2.add_win()
+        self.player2.add_win()
+        self.player1.add_win()
+        test_list2 = self.test_file.sort_player_highscore(test_list1)
+        self.assertEqual(test_list2[0].name, 'Player2')
 
 
 if __name__ == "__main__":
