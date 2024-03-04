@@ -41,12 +41,3 @@ class Player:
         """Change the player's name."""
         self.name = new_name
         return self.name
-
-    def print_player_highscore(self, list_of_players):
-        """"Sort the players by wins & print the highscore list of players."""
-        sorted_players = sorted(
-            list_of_players, key=lambda player: player.won_games, reverse=True)
-        print('Here are the Highscore list of players:')
-        for player in sorted_players:
-            score = player.get_player_score()
-            print(score)
