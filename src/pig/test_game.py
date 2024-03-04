@@ -5,6 +5,7 @@ from game import Game
 from player import Player
 from intelligence import Intelligence
 
+
 class TestGame(unittest.TestCase):
     """Test the Game class."""
 
@@ -50,7 +51,7 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.double_game.get_score_2(), 85)
 
     def test_increment_and_determine(self):
-        """Test that if the score can be incremented and determined if has won."""
+        """Test if the score can be incremented and determined if has won."""
         self.single_game.set_score(98, 85)
         self.double_game.set_score(98, 85)
         single_dic = self.single_game.increment_and_determine_1(6)
@@ -62,23 +63,22 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.single_game.increment_and_determine_2(6), 0)
         self.assertEqual(self.double_game.increment_and_determine_2(6), 0)
 
-
     def test_has_won(self):
         """Test that when score >= 100, the method returns True."""
-        self.assertFalse(self.single_game.has_won(99))        
+        self.assertFalse(self.single_game.has_won(99))
         self.assertTrue(self.single_game.has_won(100))
         self.assertTrue(self.single_game.has_won(105))
 
     def test_winner(self):
         """Test that a dictionary is returned when winning."""
         self.single_game.set_score(101, 99)
-        dict = {self.Jenny: self.single_game.get_score(self.Jenny),
-                self.Computer: self.single_game.get_score_2()}
-        self.assertEqual(dict, self.single_game.winner())
+        winning_dict = {self.Jenny: self.single_game.get_score(self.Jenny),
+                        self.Computer: self.single_game.get_score_2()}
+        self.assertEqual(winning_dict, self.single_game.winner())
         self.double_game.set_score(99, 101)
-        dict = {self.William: self.double_game.get_score_2(),
-                self.Anna: self.double_game.get_score_1()}
-        self.assertEqual(dict, self.double_game.winner())
+        winning_dict = {self.William: self.double_game.get_score_2(),
+                        self.Anna: self.double_game.get_score_1()}
+        self.assertEqual(winning_dict, self.double_game.winner())
 
     def test_cheat(self):
         """Test that winnig score can be set to 50."""
