@@ -2,15 +2,16 @@ import os
 import sys
 from game import Game
 from player import Player
-from intelligence import Intelligence
+from src.pig.intelligence import Intelligence
+
 
 def main():
     match(choose_main()):
         case "1":
-            #Choose game mode: Single Player or Multiplayer
+            # Choose game mode: Single Player or Multiplayer
             match(choose_mode()):
                 case "1":
-                    #Single Player mode
+                    # Single Player mode
 
                     name = input("Enter your name >>> ")
                     player = Player(name)
@@ -29,27 +30,27 @@ def main():
                             main()
                         
                 case "2":
-                    #Multiplayer mode
+                    # Multiplayer mode
                     name1 = input("Enter name for Player 1 >>> ")
                     name2 = input("Enter name for Player 2 >>> ")
                     player1 = Player(name1)
                     player2 = Player(name2)
-                    game = Game(player1, player2)
-                    # game.start()
+                    # game = Game(player1, player2)
+                    
                     pass
                 case "3":
                     main()
         case "2":
-            #Display Rules
+            # Display Rules
             display_rules()
             back = input()
             if back == "" or back != "":
                 main()
         case "3":
-            #Show High Scores
+            # Show High Scores
             pass
         case "4":
-            #Exit Game
+            # Exit Game
             exit_game()
                 
 
@@ -67,6 +68,7 @@ def display_main_menu():
     print("-------------------------------")
     print()
 
+
 def choose_main():
     display_main_menu()
     menu_choice = input("Choose an option >>> ")
@@ -76,6 +78,7 @@ def choose_main():
         menu_choice = input("Choose an option >>> ")
 
     return menu_choice
+
 
 def display_mode_menu():
     clear_terminal()
@@ -90,6 +93,7 @@ def display_mode_menu():
     print("-------------------------------")
     print()
 
+
 def choose_mode():
     display_mode_menu()
     mode_choice = input("Choose a game mode option >>> ")
@@ -99,6 +103,7 @@ def choose_mode():
         mode_choice = input("Choose a game mode option >>> ")
 
     return mode_choice
+
 
 def display_difficulty_menu():
     clear_terminal()
@@ -114,6 +119,7 @@ def display_difficulty_menu():
     print("-------------------------------")
     print()
 
+
 def choose_difficulty():
     display_difficulty_menu()
     difficulty_choice = input("Choose a game difficulty option >>> ")
@@ -124,6 +130,7 @@ def choose_difficulty():
 
     return difficulty_choice
 
+
 def clear_terminal():
     # For Windows
     if os.name == 'nt':
@@ -132,13 +139,15 @@ def clear_terminal():
     else:
         _ = os.system('clear')
 
+
 def exit_game():
-        clear_terminal()
-        print("-------------------------------")
-        print("|  Thank you for playing PIG! |")
-        print("|             Bye!            |")
-        print("-------------------------------")
-        sys.exit()
+    clear_terminal()
+    print("-------------------------------")
+    print("|  Thank you for playing PIG! |")
+    print("|             Bye!            |")
+    print("-------------------------------")
+    sys.exit()
+
 
 def validate_input(unchecked_input, valid_inputs):
     try:
@@ -149,6 +158,7 @@ def validate_input(unchecked_input, valid_inputs):
         print(f"Invalid option. Choose a number from {valid_inputs[0]} to {valid_inputs[-1]}.")
     
     return input
+
 
 def display_rules():
     clear_terminal()
@@ -171,6 +181,10 @@ def display_rules():
     print("|                   Press Enter to go back                  |")
     print("-------------------------------------------------------------")
     print()
+
+
+def start_game():
+    pass
 
 
 if __name__ == "__main__":

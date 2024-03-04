@@ -1,17 +1,19 @@
 from player import Player
 from dice import Dice
 
-class Intelligence(Player):
 
+class Intelligence(Player):
+    
     def __init__(self, difficulty, name="Computer"):
         super().__init__(name)
         self.difficulty = difficulty
+        self.dice = Dice(6)
 
     def play(self, game):
         turn_total = 0
 
         while True:
-            roll = Dice.roll()
+            roll = self.dice.roll()
             print(f"Computer rolled a {roll}!")
 
             match(roll):
@@ -20,7 +22,7 @@ class Intelligence(Player):
                     return turn_total
                 case _:
                     turn_total += roll
-            
+           
             match(self.difficulty):
                 case "easy":
                     if turn_total >= 20:
@@ -29,11 +31,11 @@ class Intelligence(Player):
                     if turn_total >= 25:
                         return turn_total
                 case "hard":
-                    if (game.score1 > 70 or game.score2 > 70):
+                    if game.get_score_1() > 70 or game.get_score_2() > 70:
                         continue
-                    elif turn_total >= 21 + abs(game.score1 - game.score2) / 8:
+                    elif turn_total >= 21 + abs(game.get_score_1() - game.get_score_2()) / 8:
                         return turn_total
-        
+       
 
 
         
