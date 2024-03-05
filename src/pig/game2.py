@@ -5,6 +5,7 @@
 import os
 import cmd
 import textwrap
+import time
 from dice import Dice
 from intelligence import Intelligence
 SCREEN_WIDTH = 60
@@ -81,25 +82,39 @@ class Game(cmd.Cmd):
         match(self.current_roll):
             case 1:
                 self.get_current_player().turn_total = 0
-                self.change_turn()
+                print(self.start(self.player1, self.player2))
+                time.sleep(1)
+                if isinstance(self.player2, Intelligence):
+                    self.play_computer_turn()
+                else:
+                    self.change_turn()
             case _:
                 self.get_current_player().turn_total += self.current_roll
+      
         print(self.start(self.player1, self.player2))
 
     def do_hold(self, arg):
         if self.player1_turn:
-            self.set_score(self.score1 + self.get_current_player().turn_total,
-                           self.score2)
+            game_over = self.increment_and_determine(self.score1,
+                                                     self.get_current_player()
+                                                     .turn_total)
+            if game_over:
+                self.display_game_over(game_over)
+
         else:
-            self.set_score(self.score1, self.score2 + self.get_current_player()
-                           .turn_total)
+            game_over = self.increment_and_determine(self.score2,
+                                                     self.get_current_player()
+                                                     .turn_total)
+            if game_over:
+                self.display_game_over(game_over)
 
         self.get_current_player().turn_total = 0
-        self.change_turn()
-        
-        if isinstance(self.player2, Intelligence):
-            self.set_score(self.score1, self.score2 + self.player2.play(self))
 
+        if isinstance(self.player2, Intelligence):
+            self.play_computer_turn()
+        else:
+            self.change_turn()
+        
         print(self.start(self.player1, self.player2))
     
     def do_edit_name(self, arg):
@@ -167,6 +182,12 @@ class Game(cmd.Cmd):
     def roll_dice(self):
         """A dice is rolled and an integer is returned."""
         return self.dice.roll()
+    
+    def play_computer_turn(self):
+        self.change_turn()
+        self.player2.play(self)
+        self.set_score(self.score1, self.score2 + self.player2.turn_total)
+        self.change_turn()
 
     def get_score_1(self):
         """Get player 1 score."""
@@ -176,20 +197,11 @@ class Game(cmd.Cmd):
         """Get player 2 score."""
         return self.score2
 
-    def increment_and_determine_1(self, num_rolled):
+    def increment_and_determine(self, score, num_rolled):
         """A score adder that checks if there is a winner,
            if there is, the function returns a dictionary, else 0."""
-        self.score1 += num_rolled
-        if self.has_won(self.score1) is True:
-            return self.winner()
-        else:
-            return 0
-
-    def increment_and_determine_2(self, num_rolled):
-        """A score adder that checks if there is a winner,
-           if there is, the function returns a dictionary, else 0."""
-        self.score2 += num_rolled
-        if self.has_won(self.score2) is True:
+        score += num_rolled
+        if self.has_won(score) is True:
             return self.winner()
         else:
             return 0
@@ -214,6 +226,10 @@ class Game(cmd.Cmd):
                 self.player1: self.score1
             }
         return winner_table
+    
+    def display_game_over(self, winner):
+        print(winner)
+        time.sleep(3)
 
     def cheat(self):
         """To set the winning score to 50 to end the game faster."""
