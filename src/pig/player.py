@@ -9,6 +9,7 @@ class Player:
         self.name = name
         self.played_games = 0
         self.won_games = 0
+        self.turn_total = 0
 
     def __str__(self) -> str:
         return f'Player: {self.name}'
