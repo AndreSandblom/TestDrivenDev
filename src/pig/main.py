@@ -1,4 +1,5 @@
 """Main module for the game PIG"""
+
 import os
 import sys
 from game import Game
@@ -8,17 +9,17 @@ from intelligence import Intelligence
 
 def main():
     """Main function for the game PIG."""
-    match(choose_main()):
+    match (choose_main()):
         case "1":
             # Choose game mode: Single Player or Multiplayer
-            match(choose_mode()):
+            match (choose_mode()):
                 case "1":
                     # Single Player mode
 
                     name = input("Enter your name >>> ")
                     player = Player(name)
 
-                    match(choose_difficulty()):
+                    match (choose_difficulty()):
                         case "1":
                             game = Game(player, Intelligence("easy"))
                             pass
@@ -128,7 +129,7 @@ def display_difficulty_menu():
 
 
 def choose_difficulty():
-    """"Choose a difficulty level for the single player mode."""
+    """ "Choose a difficulty level for the single player mode."""
     display_difficulty_menu()
     difficulty_choice = input("Choose a game difficulty option >>> ")
     valid_inputs = ["1", "2", "3", "4"]
@@ -142,11 +143,11 @@ def choose_difficulty():
 def clear_terminal():
     """Clear the terminal."""
     # For Windows
-    if os.name == 'nt':
-        _ = os.system('cls')
+    if os.name == "nt":
+        _ = os.system("cls")
     # For Unix-like systems (macOS, Linux)
     else:
-        _ = os.system('clear')
+        _ = os.system("clear")
 
 
 def exit_game():
@@ -166,8 +167,10 @@ def validate_input(unchecked_input, valid_inputs):
         if input not in valid_inputs:
             raise ValueError
     except ValueError:
-        print("Invalid option. Choose a number from "
-              f"{valid_inputs[0]} to {valid_inputs[-1]}.")
+        print(
+            "Invalid option. Choose a number from "
+            f"{valid_inputs[0]} to {valid_inputs[-1]}."
+        )
 
     return input
 
