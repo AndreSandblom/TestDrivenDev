@@ -16,15 +16,18 @@ class ModeMenu(cmd.Cmd):
         super().__init__()
         self.main_menu = main_menu
 
-    prompt = "Select an option >>> "
+    prompt = """Type a valid command or 'help' to see the existing commands.
+            Select an option >>> """
 
     def do_one(self, arg):
         difficulty = DifficultyMenu(self.display_mode_menu())
         DifficultyMenu(self.display_mode_menu()).cmdloop(difficulty.display_difficulty_menu())
 
     def do_two(self, arg):
-        player1 = Player(input("Enter the name for Player 1 >>> "))
-        player2 = Player(input("Enter the name for Player 2 >>> "))
+        player1 = Player(input("Enter the name for Player 1 >>> ")
+                         .capitalize())
+        player2 = Player(input("Enter the name for Player 2 >>> ").
+                         capitalize())
 
         game = Game(player1, player2)
         Game(player1, player2).cmdloop(game.start(player1, player2))

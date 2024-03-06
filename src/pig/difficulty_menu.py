@@ -16,7 +16,8 @@ class DifficultyMenu(cmd.Cmd):
         self.mode_menu = mode_menu
         self.difficulty = ''
 
-    prompt = "Select an option >>> "
+    prompt = """Type a valid command or 'help' to see the existing commands.
+            Select an option >>> """
 
     def do_easy(self, arg):
         self.difficulty = "easy"
@@ -76,7 +77,7 @@ class DifficultyMenu(cmd.Cmd):
         return difficulty_menu
 
     def create_game(self, difficulty):
-        player1 = Player(input("Enter the player's name >>> "))
+        player1 = Player(input("Enter the player's name >>> ").capitalize())
         bot = Intelligence(difficulty)
 
         game = Game(player1, bot)

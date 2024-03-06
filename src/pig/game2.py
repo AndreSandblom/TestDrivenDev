@@ -7,7 +7,9 @@ import cmd
 import textwrap
 import time
 from dice import Dice
+from highscore import Highscore
 from intelligence import Intelligence
+from player import Player
 SCREEN_WIDTH = 60
 MENU_WIDTH = SCREEN_WIDTH - 2
 LEFT_PADDING = 23
@@ -73,7 +75,8 @@ class Game(cmd.Cmd):
         self.player1_turn = True
         self.current_roll = 1
 
-    prompt = "Select an option >>> "
+    prompt = """Type a valid command or 'help' to see the existing commands.
+            Select an option >>> """
     completekey = None
 
     def do_roll(self, arg):
@@ -224,6 +227,11 @@ class Game(cmd.Cmd):
         winner_table = self.get_winner(score)
 
         if winner_table:
+            # resetting all values
+            self.score1 = 0
+            self.score2 = 0
+            # save highscore
+            self.update_highscores(winner_table["winner"])
             self.display_game_over(winner_table["winner"], winner_table["score"])
         else:
             self.get_current_player().turn_total = 0
@@ -245,17 +253,32 @@ class Game(cmd.Cmd):
         print(empty_line * 6, end='')
         print(f"|{f'{winner.name} WON': ^{MENU_WIDTH}}|")
         print(f"|{f'WITH {score} POINTS': ^{MENU_WIDTH}}|")
-
-        if isinstance(winner, Intelligence):
-            print(empty_line)
-            print(f"|{'Better luck next time!': ^{MENU_WIDTH}}|")
-            print(empty_line * 2, end='')
-        else:
-            print(empty_line * 4, end='')
-
+        print(empty_line * 4, end='')
         print(f"|{'restart OR quit': ^{MENU_WIDTH}}|")
         print(empty_line)
         print("-" * SCREEN_WIDTH)
+
+    def update_highscores(self, winner):
+        hs = Highscore("highscore.pkl2")
+        players = hs.load_highscore()
+        names = {player.get_name() for player in players}
+        current_names = [self.player1.get_name(), self.player2.get_name()]
+
+        for name in current_names:
+            if name in names:
+                for player in players:
+                    if player.get_name() == name:
+                        player.add_game()
+                        if player.get_name() == winner.get_name():
+                            player.add_win()
+            else:
+                new_player = Player(name)
+                new_player.add_game()
+                if name == winner.get_name():
+                    new_player.add_win()
+                players.append(new_player)
+
+        hs.save_highscore(players)
 
     def cheat(self):
         """Add 50 to the current player's score to end the game faster."""

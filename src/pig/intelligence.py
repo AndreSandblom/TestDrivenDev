@@ -1,6 +1,6 @@
 """This module contains the Intelligence class."""
-from player import Player
 import time
+from player import Player
 
 
 class Intelligence(Player):

@@ -12,7 +12,8 @@ LEFT_PADDING = 23
 
 class MainMenu(cmd.Cmd):
 
-    prompt = "Select an option >>> "
+    prompt = """Type a valid command or 'help' to see the existing commands.
+            Select an option >>> """
     file = "highscore.pkl2"
 
     def do_start(self, arg):
@@ -107,9 +108,9 @@ class MainMenu(cmd.Cmd):
         print(f"|{' ' * 20}{'PLAYER':15}{'WON GAMES':{MENU_WIDTH-35}}|")
         print(f"|{' ' * MENU_WIDTH}|")
 
-        for h in highscores:
-            print("|" + " " * 20 + f"{h.name:15}"
-                  + f"{h.won_games: <{MENU_WIDTH-35}}" + "|")
+        for h in range(10):
+            print("|" + " " * 20 + f"{highscores[h].name:15}"
+                  + f"{highscores[h].won_games: <{MENU_WIDTH-35}}" + "|")
         
         print(f"|{' ' * MENU_WIDTH}|")
         print(f"|{'Enter menu to go back':^{MENU_WIDTH}}|")
