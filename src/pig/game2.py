@@ -71,7 +71,6 @@ class Game(cmd.Cmd):
         self.score1 = 0
         self.score2 = 0
         self.player1_turn = True
-        self.player2_turn = False
         self.current_roll = 1
 
     prompt = "Select an option >>> "
@@ -95,33 +94,19 @@ class Game(cmd.Cmd):
 
     def do_hold(self, arg):
         if self.player1_turn:
-            game_over = self.increment_and_determine(self.score1,
-                                                     self.get_current_player()
-                                                     .turn_total)
-            if game_over:
-                self.display_game_over(game_over)
-
+            self.check_end_of_game(self.score1)
         else:
-            game_over = self.increment_and_determine(self.score2,
-                                                     self.get_current_player()
-                                                     .turn_total)
-            if game_over:
-                self.display_game_over(game_over)
-
-        self.get_current_player().turn_total = 0
-
-        if isinstance(self.player2, Intelligence):
-            self.play_computer_turn()
-        else:
-            self.change_turn()
-        
-        print(self.start(self.player1, self.player2))
+            self.check_end_of_game(self.score2)
     
     def do_edit_name(self, arg):
         pass
 
     def do_cheat(self, arg):
-        pass
+        self.cheat()
+        if self.player1_turn:
+            self.check_end_of_game(self.score1)
+        else:
+            self.check_end_of_game(self.score2)
 
     def do_restart(self, arg):
         pass
@@ -158,7 +143,7 @@ class Game(cmd.Cmd):
         |{" " * MENU_WIDTH}|
         |{self.get_current_player().name +"'s Turn": ^{MENU_WIDTH}}|
         |{"Turn Total: " + str(self.get_current_player().turn_total): ^{MENU_WIDTH}}|
-        |{"roll or hold?": ^{MENU_WIDTH}}|
+        |{"roll OR hold": ^{MENU_WIDTH}}|
         |{" " * MENU_WIDTH}|
         {"-" * SCREEN_WIDTH}
         """)
@@ -174,10 +159,8 @@ class Game(cmd.Cmd):
     def change_turn(self):
         if self.player1_turn:
             self.player1_turn = False
-            self.player2_turn = True
         else:
             self.player1_turn = True
-            self.player2_turn = False
 
     def roll_dice(self):
         """A dice is rolled and an integer is returned."""
@@ -186,8 +169,7 @@ class Game(cmd.Cmd):
     def play_computer_turn(self):
         self.change_turn()
         self.player2.play(self)
-        self.set_score(self.score1, self.score2 + self.player2.turn_total)
-        self.change_turn()
+        self.check_end_of_game(self.score2)
 
     def get_score_1(self):
         """Get player 1 score."""
@@ -197,48 +179,97 @@ class Game(cmd.Cmd):
         """Get player 2 score."""
         return self.score2
 
-    def increment_and_determine(self, score, num_rolled):
+    def increment_and_determine(self, score, turn_total):
         """A score adder that checks if there is a winner,
-           if there is, the function returns a dictionary, else 0."""
-        score += num_rolled
-        if self.has_won(score) is True:
-            return self.winner()
-        else:
-            return 0
+           if there is, the function returns True, else False."""
+        score += turn_total
+        self.set_score(score)
+
+        game_over = self.has_won(score)
+        return game_over
 
     def has_won(self, score):
         """Check if a player has won."""
         if score >= self.winning_score:
             return True
-        else:
-            return False
+
+        return False
 
     def winner(self):
-        """Generates a dictionary of name and score."""
+        """Generates a dictionary of a winner and score."""
         if self.score1 > self.score2:
             winner_table = {
-                self.player1: self.score1,
-                self.player2: self.score2
-            }
+                "winner": self.player1,
+                "score": self.score1
+                }
         else:
             winner_table = {
-                self.player2: self.score2,
-                self.player1: self.score1
-            }
+                "winner": self.player2,
+                "score": self.score2
+                }
+        return winner_table
+
+    def get_winner(self, score):
+        game_over = self.increment_and_determine(score,
+                                                 self.get_current_player()
+                                                 .turn_total)
+        if game_over:
+            winner_table = self.winner()
+        else:
+            winner_table = {}
+
         return winner_table
     
-    def display_game_over(self, winner):
-        print(winner)
-        time.sleep(3)
+    def check_end_of_game(self, score):
+        winner_table = self.get_winner(score)
+
+        if winner_table:
+            self.display_game_over(winner_table["winner"], winner_table["score"])
+        else:
+            self.get_current_player().turn_total = 0
+
+            if isinstance(self.player2, Intelligence) and not isinstance(self.get_current_player(), Intelligence):
+                self.play_computer_turn()
+            else:
+                self.change_turn()
+            
+            print(self.start(self.player1, self.player2))
+
+    def display_game_over(self, winner, score):
+        self.clear_terminal()
+        empty_line = f"|{' ' * MENU_WIDTH}|\n"
+        print()
+        print("-" * SCREEN_WIDTH)
+        print(f"|{'GAME OVER': ^{MENU_WIDTH}}|")
+        print("-" * SCREEN_WIDTH)
+        print(empty_line * 6, end='')
+        print(f"|{f'{winner.name} WON': ^{MENU_WIDTH}}|")
+        print(f"|{f'WITH {score} POINTS': ^{MENU_WIDTH}}|")
+
+        if isinstance(winner, Intelligence):
+            print(empty_line)
+            print(f"|{'Better luck next time!': ^{MENU_WIDTH}}|")
+            print(empty_line * 2, end='')
+        else:
+            print(empty_line * 4, end='')
+
+        print(f"|{'restart OR quit': ^{MENU_WIDTH}}|")
+        print(empty_line)
+        print("-" * SCREEN_WIDTH)
 
     def cheat(self):
-        """To set the winning score to 50 to end the game faster."""
-        self.winning_score = 50
+        """Add 50 to the current player's score to end the game faster."""
+        if self.player1_turn:
+            self.score1 += 50
+        else:
+            self.score2 += 50
 
-    def set_score(self, num1, num2):
+    def set_score(self, score):
         """Set player scores."""
-        self.score1 = num1
-        self.score2 = num2
+        if self.player1_turn:
+            self.score1 = score
+        else:
+            self.score2 = score
 
     def get_winning_score(self):
         """Get the winnning score."""
