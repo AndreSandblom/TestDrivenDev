@@ -12,8 +12,9 @@ LEFT_PADDING = 23
 
 class MainMenu(cmd.Cmd):
 
-    prompt = """Type a valid command or 'help' to see the existing commands.
-            Select an option >>> """
+    prompt = textwrap.dedent("""\
+        Type a valid command or 'help' to see the existing commands.
+        >>> """)
     file = "highscore.pkl2"
 
     def do_start(self, arg):
@@ -105,12 +106,24 @@ class MainMenu(cmd.Cmd):
         print(f"|{'HIGH SCORES': ^{MENU_WIDTH}}|")
         print("-" * SCREEN_WIDTH)
         print(f"|{' ' * MENU_WIDTH}|")
-        print(f"|{' ' * 20}{'PLAYER':15}{'WON GAMES':{MENU_WIDTH-35}}|")
+        print(f"|{' ' * 10}{'PLAYER':15}{'PLAYED GAMES':15}"
+              + f"{'WON GAMES':{MENU_WIDTH-40}}|")
         print(f"|{' ' * MENU_WIDTH}|")
 
-        for h in range(10):
-            print("|" + " " * 20 + f"{highscores[h].name:15}"
-                  + f"{highscores[h].won_games: <{MENU_WIDTH-35}}" + "|")
+        if len(highscores) >= 10:
+            for h in range(10):
+                print("|" + " " * 10 + f"{highscores[h].name:15}"
+                      + f"{highscores[h].played_games:15}"
+                      + f"{highscores[h].won_games: <{MENU_WIDTH-40}}" + "|")
+        else:
+            for h in highscores:
+                print("|" + " " * 10 + f"{h.name:15}"
+                      + f"{h.played_games:<15}"
+                      + f"{h.won_games: <{MENU_WIDTH-40}}" + "|")
+            for slot in range(10 - len(highscores)):
+                print("|" + " " * 10 + f"{'-----':15}"
+                      + f"{'0':15}"
+                      + f"{'0': <{MENU_WIDTH-40}}" + "|")
         
         print(f"|{' ' * MENU_WIDTH}|")
         print(f"|{'Enter menu to go back':^{MENU_WIDTH}}|")

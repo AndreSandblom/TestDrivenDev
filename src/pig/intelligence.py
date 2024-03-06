@@ -30,9 +30,9 @@ class Intelligence(Player):
                 self.turn_total = 0
             case _:
                 self.turn_total += roll_number
-            
+
         return self.turn_total
-    
+
     def check_difficulty_action(self, game):
         match(self.difficulty):
             case "easy":

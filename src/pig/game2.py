@@ -75,9 +75,9 @@ class Game(cmd.Cmd):
         self.player1_turn = True
         self.current_roll = 1
 
-    prompt = """Type a valid command or 'help' to see the existing commands.
-            Select an option >>> """
-    completekey = None
+    prompt = textwrap.dedent("""\
+        Type a valid command or 'help' to see the existing commands.
+        >>> """)
 
     def do_roll(self, arg):
         self.current_roll = self.roll_dice()
@@ -92,7 +92,7 @@ class Game(cmd.Cmd):
                     self.change_turn()
             case _:
                 self.get_current_player().turn_total += self.current_roll
-      
+
         print(self.start(self.player1, self.player2))
 
     def do_hold(self, arg):
@@ -100,7 +100,7 @@ class Game(cmd.Cmd):
             self.check_end_of_game(self.score1)
         else:
             self.check_end_of_game(self.score2)
-    
+
     def do_edit_name(self, arg):
         pass
 
@@ -112,10 +112,12 @@ class Game(cmd.Cmd):
             self.check_end_of_game(self.score2)
 
     def do_restart(self, arg):
-        pass
+        self.clear_terminal()
+        self.cmdloop()
 
     def do_quit(self, arg):
-        pass
+        self.clear_terminal()
+        return True
 
     def clear_terminal(self):
         """Clear the terminal."""
@@ -145,20 +147,21 @@ class Game(cmd.Cmd):
         {die_side}
         |{" " * MENU_WIDTH}|
         |{self.get_current_player().name +"'s Turn": ^{MENU_WIDTH}}|
-        |{"Turn Total: " + str(self.get_current_player().turn_total): ^{MENU_WIDTH}}|
+        |{"Turn Total: " + str(self.get_current_player().turn_total)
+          : ^{MENU_WIDTH}}|
         |{"roll OR hold": ^{MENU_WIDTH}}|
         |{" " * MENU_WIDTH}|
         {"-" * SCREEN_WIDTH}
         """)
 
         return game
-  
+
     def get_current_player(self):
         if self.player1_turn:
             return self.player1
-   
+
         return self.player2
-    
+
     def change_turn(self):
         if self.player1_turn:
             self.player1_turn = False
@@ -168,7 +171,7 @@ class Game(cmd.Cmd):
     def roll_dice(self):
         """A dice is rolled and an integer is returned."""
         return self.dice.roll()
-    
+
     def play_computer_turn(self):
         self.change_turn()
         self.player2.play(self)
@@ -222,25 +225,24 @@ class Game(cmd.Cmd):
             winner_table = {}
 
         return winner_table
-    
+
     def check_end_of_game(self, score):
         winner_table = self.get_winner(score)
 
         if winner_table:
-            # resetting all values
-            self.score1 = 0
-            self.score2 = 0
             # save highscore
             self.update_highscores(winner_table["winner"])
-            self.display_game_over(winner_table["winner"], winner_table["score"])
+            self.display_game_over(winner_table["winner"],
+                                   winner_table["score"])
         else:
             self.get_current_player().turn_total = 0
 
-            if isinstance(self.player2, Intelligence) and not isinstance(self.get_current_player(), Intelligence):
+            if (isinstance(self.player2, Intelligence) and
+               not isinstance(self.get_current_player(), Intelligence)):
                 self.play_computer_turn()
             else:
                 self.change_turn()
-            
+
             print(self.start(self.player1, self.player2))
 
     def display_game_over(self, winner, score):
@@ -272,11 +274,12 @@ class Game(cmd.Cmd):
                         if player.get_name() == winner.get_name():
                             player.add_win()
             else:
-                new_player = Player(name)
-                new_player.add_game()
-                if name == winner.get_name():
-                    new_player.add_win()
-                players.append(new_player)
+                if name != "Computer":
+                    new_player = Player(name)
+                    new_player.add_game()
+                    if name == winner.get_name():
+                        new_player.add_win()
+                    players.append(new_player)
 
         hs.save_highscore(players)
 

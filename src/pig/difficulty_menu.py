@@ -16,23 +16,27 @@ class DifficultyMenu(cmd.Cmd):
         self.mode_menu = mode_menu
         self.difficulty = ''
 
-    prompt = """Type a valid command or 'help' to see the existing commands.
-            Select an option >>> """
+    prompt = textwrap.dedent("""\
+        Type a valid command or 'help' to see the existing commands.
+        >>> """)
 
     def do_easy(self, arg):
         self.difficulty = "easy"
         game = self.create_game(self.difficulty)
-        Game(game.player1, game.player2).cmdloop(game.start(game.player1, game.player2))
+        Game(game.player1, game.player2).cmdloop(game.start(game.player1,
+                                                            game.player2))
 
     def do_normal(self, arg):
         self.difficulty = "normal"
         game = self.create_game(self.difficulty)
-        Game(game.player1, game.player2).cmdloop(game.start(game.player1, game.player2))
+        Game(game.player1, game.player2).cmdloop(game.start(game.player1,
+                                                            game.player2))
 
     def do_hard(self, arg):
         self.difficulty = "hard"
         game = self.create_game(self.difficulty)
-        Game(game.player1, game.player2).cmdloop(game.start(game.player1, game.player2))
+        Game(game.player1, game.player2).cmdloop(game.start(game.player1,
+                                                            game.player2))
 
     def do_back(self, arg):
         self.clear_terminal()

@@ -16,12 +16,14 @@ class ModeMenu(cmd.Cmd):
         super().__init__()
         self.main_menu = main_menu
 
-    prompt = """Type a valid command or 'help' to see the existing commands.
-            Select an option >>> """
+    prompt = textwrap.dedent("""\
+        Type a valid command or 'help' to see the existing commands.
+        >>> """)
 
     def do_one(self, arg):
         difficulty = DifficultyMenu(self.display_mode_menu())
-        DifficultyMenu(self.display_mode_menu()).cmdloop(difficulty.display_difficulty_menu())
+        DifficultyMenu(self.display_mode_menu()).cmdloop(
+            difficulty.display_difficulty_menu())
 
     def do_two(self, arg):
         player1 = Player(input("Enter the name for Player 1 >>> ")
@@ -35,7 +37,7 @@ class ModeMenu(cmd.Cmd):
     def do_back(self, arg):
         self.clear_terminal()
         print(self.main_menu)
-        return True
+        return True, arg
 
     def clear_terminal(self):
         """Clear the terminal."""
