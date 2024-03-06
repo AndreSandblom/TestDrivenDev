@@ -43,7 +43,9 @@ class Intelligence(Player):
                     return False
             case "hard":
                 if game.get_score_1() > 70 or game.get_score_2() > 70:
-                    pass
+                    if (game.get_score_2() + self.turn_total >=
+                       game.get_winning_score()):
+                        return False
                 elif self.turn_total >= 21 + abs(game.get_score_1()
                                                  - game.get_score_2()) / 8:
                     return False

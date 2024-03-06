@@ -11,9 +11,10 @@ LEFT_PADDING = 25
 
 class DifficultyMenu(cmd.Cmd):
 
-    def __init__(self, mode_menu):
+    def __init__(self, mode_menu, exit_menu):
         super().__init__()
         self.mode_menu = mode_menu
+        self.exit_menu = exit_menu
         self.difficulty = ''
 
     prompt = textwrap.dedent("""\
@@ -23,20 +24,17 @@ class DifficultyMenu(cmd.Cmd):
     def do_easy(self, arg):
         self.difficulty = "easy"
         game = self.create_game(self.difficulty)
-        Game(game.player1, game.player2).cmdloop(game.start(game.player1,
-                                                            game.player2))
+        game.cmdloop(game.start(game.player1, game.player2))
 
     def do_normal(self, arg):
         self.difficulty = "normal"
         game = self.create_game(self.difficulty)
-        Game(game.player1, game.player2).cmdloop(game.start(game.player1,
-                                                            game.player2))
+        game.cmdloop(game.start(game.player1, game.player2))
 
     def do_hard(self, arg):
         self.difficulty = "hard"
         game = self.create_game(self.difficulty)
-        Game(game.player1, game.player2).cmdloop(game.start(game.player1,
-                                                            game.player2))
+        game.cmdloop(game.start(game.player1, game.player2))
 
     def do_back(self, arg):
         self.clear_terminal()
@@ -84,6 +82,6 @@ class DifficultyMenu(cmd.Cmd):
         player1 = Player(input("Enter the player's name >>> ").capitalize())
         bot = Intelligence(difficulty)
 
-        game = Game(player1, bot)
+        game = Game(player1, bot, self.exit_menu)
 
         return game

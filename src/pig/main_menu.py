@@ -18,8 +18,8 @@ class MainMenu(cmd.Cmd):
     file = "highscore.pkl2"
 
     def do_start(self, arg):
-        mode = ModeMenu(self.display_main_menu())
-        ModeMenu(self.display_main_menu()).cmdloop(mode.display_mode_menu())
+        mode = ModeMenu(self.display_main_menu(), self.exit_game)
+        mode.cmdloop(mode.display_mode_menu())
 
     def do_rules(self, arg):
         self.display_rules()

@@ -63,7 +63,7 @@ DIE_SIDES = {
 class Game(cmd.Cmd):
     """Pig game with dice roll, increment and determine winner"""
 
-    def __init__(self, player1, player2):
+    def __init__(self, player1, player2, exit_menu):
         """Constructor for single and 2 player game."""
         super().__init__()
         self.player1 = player1
@@ -74,6 +74,7 @@ class Game(cmd.Cmd):
         self.score2 = 0
         self.player1_turn = True
         self.current_roll = 1
+        self.exit_menu = exit_menu
 
     prompt = textwrap.dedent("""\
         Type a valid command or 'help' to see the existing commands.
@@ -102,7 +103,21 @@ class Game(cmd.Cmd):
             self.check_end_of_game(self.score2)
 
     def do_edit_name(self, arg):
-        pass
+        current_player = self.get_current_player()
+        new_name = input("Edit current player's name ("
+                         + f"{current_player.get_name()}) >>> ")
+
+        if current_player.get_name() == self.player1.get_name():
+            other_player = self.player2
+        else:
+            other_player = self.player1
+
+        current_player.change_name(new_name)
+
+        if other_player.get_name() == self.player1.get_name():
+            print(self.start(other_player, current_player))
+        else:
+            print(self.start(current_player, other_player))
 
     def do_cheat(self, arg):
         self.cheat()
@@ -112,11 +127,16 @@ class Game(cmd.Cmd):
             self.check_end_of_game(self.score2)
 
     def do_restart(self, arg):
+        self.score1 = 0
+        self.score2 = 0
+        self.player1.turn_total = 0
+        self.player2.turn_total = 0
         self.clear_terminal()
-        self.cmdloop()
+        self.cmdloop(self.start(self.player1, self.player2))
 
     def do_quit(self, arg):
         self.clear_terminal()
+        self.exit_menu()
         return True
 
     def clear_terminal(self):
@@ -196,7 +216,7 @@ class Game(cmd.Cmd):
 
     def has_won(self, score):
         """Check if a player has won."""
-        if score >= self.winning_score:
+        if score >= self.get_winning_score():
             return True
 
         return False
@@ -240,6 +260,7 @@ class Game(cmd.Cmd):
             if (isinstance(self.player2, Intelligence) and
                not isinstance(self.get_current_player(), Intelligence)):
                 self.play_computer_turn()
+                return
             else:
                 self.change_turn()
 
@@ -248,16 +269,17 @@ class Game(cmd.Cmd):
     def display_game_over(self, winner, score):
         self.clear_terminal()
         empty_line = f"|{' ' * MENU_WIDTH}|\n"
+
         print()
         print("-" * SCREEN_WIDTH)
         print(f"|{'GAME OVER': ^{MENU_WIDTH}}|")
         print("-" * SCREEN_WIDTH)
         print(empty_line * 6, end='')
-        print(f"|{f'{winner.name} WON': ^{MENU_WIDTH}}|")
+        print(f"|{f'{winner.get_name()} WON': ^{MENU_WIDTH}}|")
         print(f"|{f'WITH {score} POINTS': ^{MENU_WIDTH}}|")
         print(empty_line * 4, end='')
         print(f"|{'restart OR quit': ^{MENU_WIDTH}}|")
-        print(empty_line)
+        print(empty_line, end='')
         print("-" * SCREEN_WIDTH)
 
     def update_highscores(self, winner):
