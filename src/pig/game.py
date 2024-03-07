@@ -1,16 +1,15 @@
-""" Game class: Single Player & 2 Players modes
-    Pig game with dice roll, increment and determine winner
-    and cheat etc functions """
+""" Game class: Single Player & 2 Players modes.
 
+Pig game with dice roll, increment, determine winner and cheat functions.
+"""
 from dice import Dice
-from player import Player
-from intelligence import Intelligence
 
 
 class Game:
-    """Pig game with dice roll, increment and determine winner"""
+    """Pig game with dice roll, increment and determine winner."""
+
     def __init__(self, player1, player2):
-        """Constructor for single and 2 player game."""
+        """Initiate constructor for single and 2 player game."""
         self.player1 = player1
         self.player2 = player2
         self.dice = Dice(6)
@@ -19,7 +18,7 @@ class Game:
         self.score2 = 0
 
     def roll_dice(self):
-        """A dice is rolled and an integer is returned."""
+        """Roll dice and an integer is returned."""
         return self.dice.roll()
 
     def get_score_1(self):
@@ -31,8 +30,7 @@ class Game:
         return self.score2
 
     def increment_and_determine_1(self, num_rolled):
-        """A score adder that checks if there is a winner,
-           if there is, the function returns a dictionary, else 0."""
+        """Add score and check for winner and returns a dictionary, else 0."""
         self.score1 += num_rolled
         if self.has_won(self.score1) is True:
             return self.winner()
@@ -40,8 +38,7 @@ class Game:
             return 0
 
     def increment_and_determine_2(self, num_rolled):
-        """A score adder that checks if there is a winner,
-           if there is, the function returns a dictionary, else 0."""
+        """Add score and check for winner and returns a dictionary, else 0."""
         self.score2 += num_rolled
         if self.has_won(self.score2) is True:
             return self.winner()
@@ -56,7 +53,7 @@ class Game:
             return False
 
     def winner(self):
-        """Generates a dictionary of name and score."""
+        """Generate a dictionary of name and score."""
         if self.score1 > self.score2:
             winner_table = {
                 self.player1: self.score1,

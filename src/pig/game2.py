@@ -81,6 +81,8 @@ class Game(cmd.Cmd):
         >>> """)
 
     def do_roll(self, arg):
+        """Roll a dice, if it's a 1, reset turn total, the other player's turn;
+        if it's not a 1, turn total increments."""
         self.current_roll = self.roll_dice()
         match(self.current_roll):
             case 1:
