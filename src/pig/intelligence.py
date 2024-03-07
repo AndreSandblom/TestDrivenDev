@@ -1,6 +1,6 @@
 """This module contains the Intelligence class."""
-from player import Player
 import time
+from player import Player
 
 
 class Intelligence(Player):
@@ -30,9 +30,9 @@ class Intelligence(Player):
                 self.turn_total = 0
             case _:
                 self.turn_total += roll_number
-            
+
         return self.turn_total
-    
+
     def check_difficulty_action(self, game):
         match(self.difficulty):
             case "easy":
@@ -43,7 +43,9 @@ class Intelligence(Player):
                     return False
             case "hard":
                 if game.get_score_1() > 70 or game.get_score_2() > 70:
-                    pass
+                    if (game.get_score_2() + self.turn_total >=
+                       game.get_winning_score()):
+                        return False
                 elif self.turn_total >= 21 + abs(game.get_score_1()
                                                  - game.get_score_2()) / 8:
                     return False
