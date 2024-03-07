@@ -1,7 +1,6 @@
 """Unit testing for game2 class."""
 
 import unittest
-import textwrap
 from unittest.mock import patch
 from game2 import Game
 from player import Player
@@ -155,61 +154,5 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.single_game.get_winning_score(), 100)
         self.assertEqual(self.double_game.get_winning_score(), 100)
 
-    # def test_start(self):
-    #         """Test the print is the same from the method."""
-    #         self.single_game.set_score(10)
-    #         self.single_game.change_turn()
-    #         self.single_game.set_score(20)
-    #         self.single_game.current_roll = 3
-
-    #         expected = textwrap.dedent("""
-    #         --------------------------------------------------
-    #         |                  PIG                           |
-    #         --------------------------------------------------
-    #         |                                                |
-    #         |    Player 1: Alice     Player 2: Bob           |
-    #         |    Score: 10           Score: 20               |
-    #         |                                                |
-    #         |                   DIE ROLL                     |
-    #         |        -------                                 |
-    #         |    Alice's Turn                                |
-    #         |    Turn Total: 0                               |
-    #         |    roll or hold?                               |
-    #         |                                                |
-    #         --------------------------------------------------
-    #         """)
-    #         self.assertEqual(
-    #             self.single_game.start(self.Jenny, self.Computer), expected)
-        
-    # def test_do_hold(self):
-    #     # Not sure how to implement
-    #     pass
-
-    # def test_check_end_of_game(self):
-    #     # Not sure how to implement
-    #     pass
-    
-    # def test_do_edit_name(self):
-    #     pass
-
-    # def test_do_cheat(self):
-    #     """"""
-    #     if self.double_game.player1_turn:
-    #         pass
-
-    # def test_do_restart(self):
-    #     pass
-
-    # def test_do_quit(self):
-    #     pass
-
-    # def test_update_highscores(self):
-    #     pass
-
-    # def test_play_computer_turn(self):
-    #     """"""
-    #     pass
-
 if __name__ == "__main__":
     unittest.main()
-
