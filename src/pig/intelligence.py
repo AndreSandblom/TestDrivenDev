@@ -1,7 +1,6 @@
 """This module contains the Intelligence class."""
-
+import time
 from player import Player
-from dice import Dice
 
 
 class Intelligence(Player):
@@ -13,28 +12,42 @@ class Intelligence(Player):
 
     def play(self, game):
         """The computer player's turn."""
-        turn_total = 0
+        self.turn_total = 0
+        ongoing = True
+        while ongoing:
+            game.current_roll = game.roll_dice()
+            if self.check_roll(game.current_roll) != 0:
+                ongoing = self.check_difficulty_action(game)
+            else:
+                ongoing = False
 
-        while True:
-            roll = Dice.roll()
-            print(f"Computer rolled a {roll}!")
+            print(game.start(game.player1, self))
+            time.sleep(1)
 
-            match (roll):
-                case 1:
-                    turn_total = 0
-                    return turn_total
-                case _:
-                    turn_total += roll
+    def check_roll(self, roll_number):
+        match(roll_number):
+            case 1:
+                self.turn_total = 0
+            case _:
+                self.turn_total += roll_number
 
-            match (self.difficulty):
-                case "easy":
-                    if turn_total >= 20:
-                        return turn_total
-                case "normal":
-                    if turn_total >= 25:
-                        return turn_total
-                case "hard":
-                    if game.score1 > 70 or game.score2 > 70:
-                        continue
-                    elif turn_total >= 21 + abs(game.score1 - game.score2) / 8:
-                        return turn_total
+        return self.turn_total
+
+    def check_difficulty_action(self, game):
+        match(self.difficulty):
+            case "easy":
+                if self.turn_total >= 20:
+                    return False
+            case "normal":
+                if self.turn_total >= 25:
+                    return False
+            case "hard":
+                if game.get_score_1() > 70 or game.get_score_2() > 70:
+                    if (game.get_score_2() + self.turn_total >=
+                       game.get_winning_score()):
+                        return False
+                elif self.turn_total >= 21 + abs(game.get_score_1()
+                                                 - game.get_score_2()) / 8:
+                    return False
+
+        return True
