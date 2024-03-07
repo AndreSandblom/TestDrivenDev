@@ -1,0 +1,1231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>game2 API documentation</title>
+<meta name="description" content="Game class: Single Player &amp; 2 Players modes
+Pig game with dice roll, increment and determine winner
+and cheat etc functions" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>game2</code></h1>
+</header>
+<section id="section-intro">
+<p>Game class: Single Player &amp; 2 Players modes
+Pig game with dice roll, increment and determine winner
+and cheat etc functions</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34; Game class: Single Player &amp; 2 Players modes
+    Pig game with dice roll, increment and determine winner
+    and cheat etc functions &#34;&#34;&#34;
+
+import os
+import cmd
+import textwrap
+import time
+from dice import Dice
+from highscore import Highscore
+from intelligence import Intelligence
+from player import Player
+SCREEN_WIDTH = 60
+MENU_WIDTH = SCREEN_WIDTH - 2
+LEFT_PADDING = 23
+
+DIE_SIDES = {
+        1: f&#34;&#34;&#34;
+        |{&#34;┌─────────┐&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│         │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│    ●    │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│         │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;└─────────┘&#34;: ^{MENU_WIDTH}}|\
+        &#34;&#34;&#34;,
+        2: f&#34;&#34;&#34;
+        |{&#34;┌─────────┐&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│ ●       │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│         │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│       ● │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;└─────────┘&#34;: ^{MENU_WIDTH}}|\
+        &#34;&#34;&#34;,
+        3: f&#34;&#34;&#34;
+        |{&#34;┌─────────┐&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│ ●       │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│    ●    │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│       ● │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;└─────────┘&#34;: ^{MENU_WIDTH}}|\
+        &#34;&#34;&#34;,
+        4: f&#34;&#34;&#34;
+        |{&#34;┌─────────┐&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│ ●     ● │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│         │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│ ●     ● │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;└─────────┘&#34;: ^{MENU_WIDTH}}|\
+        &#34;&#34;&#34;,
+        5: f&#34;&#34;&#34;
+        |{&#34;┌─────────┐&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│ ●     ● │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│    ●    │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│ ●     ● │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;└─────────┘&#34;: ^{MENU_WIDTH}}|\
+        &#34;&#34;&#34;,
+        6: f&#34;&#34;&#34;
+        |{&#34;┌─────────┐&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│ ●     ● │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│ ●     ● │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;│ ●     ● │&#34;: ^{MENU_WIDTH}}|
+        |{&#34;└─────────┘&#34;: ^{MENU_WIDTH}}|\
+        &#34;&#34;&#34;
+    }
+
+
+class Game(cmd.Cmd):
+    &#34;&#34;&#34;Pig game with dice roll, increment and determine winner&#34;&#34;&#34;
+
+    def __init__(self, player1, player2, exit_menu):
+        &#34;&#34;&#34;Constructor for single and 2 player game.&#34;&#34;&#34;
+        super().__init__()
+        self.player1 = player1
+        self.player2 = player2
+        self.dice = Dice(6)
+        self.winning_score = 100
+        self.score1 = 0
+        self.score2 = 0
+        self.player1_turn = True
+        self.current_roll = 1
+        self.exit_menu = exit_menu
+
+    prompt = textwrap.dedent(&#34;&#34;&#34;\
+        Type a valid command or &#39;help&#39; to see the existing commands.
+        &gt;&gt;&gt; &#34;&#34;&#34;)
+
+    def do_roll(self, arg):
+        &#34;&#34;&#34;Roll the dice and update the turn total.&#34;&#34;&#34;
+        self.current_roll = self.roll_dice()
+        match(self.current_roll):
+            case 1:
+                self.get_current_player().turn_total = 0
+                print(self.start(self.player1, self.player2))
+                time.sleep(1)
+                if isinstance(self.player2, Intelligence):
+                    self.play_computer_turn()
+                else:
+                    self.change_turn()
+            case _:
+                self.get_current_player().turn_total += self.current_roll
+
+        print(self.start(self.player1, self.player2))
+
+    def do_hold(self, arg):
+        &#34;&#34;&#34;Hold the current turn total and update the score.&#34;&#34;&#34;
+        if self.player1_turn:
+            self.check_end_of_game(self.score1)
+        else:
+            self.check_end_of_game(self.score2)
+
+    def do_edit_name(self, arg):
+        &#34;&#34;&#34;Edit the current player&#39;s name.&#34;&#34;&#34;
+        current_player = self.get_current_player()
+        new_name = input(&#34;Edit current player&#39;s name (&#34;
+                         + f&#34;{current_player.get_name()}) &gt;&gt;&gt; &#34;)
+
+        if current_player.get_name() == self.player1.get_name():
+            other_player = self.player2
+        else:
+            other_player = self.player1
+
+        current_player.change_name(new_name)
+
+        if other_player.get_name() == self.player1.get_name():
+            print(self.start(other_player, current_player))
+        else:
+            print(self.start(current_player, other_player))
+
+    def do_cheat(self, arg):
+        &#34;&#34;&#34;Cheat to end the game faster.&#34;&#34;&#34;
+        self.cheat()
+        if self.player1_turn:
+            self.check_end_of_game(self.score1)
+        else:
+            self.check_end_of_game(self.score2)
+
+    def do_restart(self, arg):
+        &#34;&#34;&#34;Restart the game.&#34;&#34;&#34;
+        self.score1 = 0
+        self.score2 = 0
+        self.player1.turn_total = 0
+        self.player2.turn_total = 0
+        self.clear_terminal()
+        self.cmdloop(self.start(self.player1, self.player2))
+
+    def do_quit(self, arg):
+        &#34;&#34;&#34;Quit the game.&#34;&#34;&#34;
+        self.clear_terminal()
+        self.exit_menu()
+        return True
+
+    def clear_terminal(self):
+        &#34;&#34;&#34;Clear the terminal.&#34;&#34;&#34;
+
+        if os.name == &#39;nt&#39;:
+            # For Windows
+            _ = os.system(&#39;cls&#39;)
+        else:
+            # For Unix-like systems (macOS, Linux)
+            _ = os.system(&#39;clear&#39;)
+
+    def start(self, player1, player2):
+        &#34;&#34;&#34;Display the main screen of the game.&#34;&#34;&#34;
+
+        self.clear_terminal()
+
+        die_side = DIE_SIDES[self.current_roll]
+        game = textwrap.dedent(f&#34;&#34;&#34;
+        {&#34;-&#34; * SCREEN_WIDTH}
+        |{&#34;PIG&#34;: ^{MENU_WIDTH}}|
+        {&#34;-&#34; * SCREEN_WIDTH}
+        |{&#34; &#34; * MENU_WIDTH}|
+        |    Player 1: {player1.name:17}Player 2: {player2.name:17}|
+        |    Score: {self.score1: &lt;20}Score: {self.score2:&lt;20}|
+        |{&#34; &#34; * MENU_WIDTH}|
+        |{&#34;DIE ROLL&#34;: ^{MENU_WIDTH}}|\
+        {die_side}
+        |{&#34; &#34; * MENU_WIDTH}|
+        |{self.get_current_player().name +&#34;&#39;s Turn&#34;: ^{MENU_WIDTH}}|
+        |{&#34;Turn Total: &#34; + str(self.get_current_player().turn_total)
+          : ^{MENU_WIDTH}}|
+        |{&#34;roll OR hold&#34;: ^{MENU_WIDTH}}|
+        |{&#34; &#34; * MENU_WIDTH}|
+        {&#34;-&#34; * SCREEN_WIDTH}
+        &#34;&#34;&#34;)
+
+        return game
+
+    def get_current_player(self):
+        &#34;&#34;&#34;Get the current player.&#34;&#34;&#34;
+        if self.player1_turn:
+            return self.player1
+
+        return self.player2
+
+    def change_turn(self):
+        &#34;&#34;&#34;Change the turn of the current player.&#34;&#34;&#34;
+        if self.player1_turn:
+            self.player1_turn = False
+        else:
+            self.player1_turn = True
+
+    def roll_dice(self):
+        &#34;&#34;&#34;A dice is rolled and an integer is returned.&#34;&#34;&#34;
+        return self.dice.roll()
+
+    def play_computer_turn(self):
+        &#34;&#34;&#34;Play the computer&#39;s turn.&#34;&#34;&#34;
+        self.change_turn()
+        self.player2.play(self)
+        self.check_end_of_game(self.score2)
+
+    def get_score_1(self):
+        &#34;&#34;&#34;Get player 1 score.&#34;&#34;&#34;
+        return self.score1
+
+    def get_score_2(self):
+        &#34;&#34;&#34;Get player 2 score.&#34;&#34;&#34;
+        return self.score2
+
+    def increment_and_determine(self, score, turn_total):
+        &#34;&#34;&#34;A score adder that checks if there is a winner,
+           if there is, the function returns True, else False.&#34;&#34;&#34;
+        score += turn_total
+        self.set_score(score)
+
+        game_over = self.has_won(score)
+        return game_over
+
+    def has_won(self, score):
+        &#34;&#34;&#34;Check if a player has won.&#34;&#34;&#34;
+        if score &gt;= self.get_winning_score():
+            return True
+
+        return False
+
+    def winner(self):
+        &#34;&#34;&#34;Generates a dictionary of a winner and score.&#34;&#34;&#34;
+        if self.score1 &gt; self.score2:
+            winner_table = {
+                &#34;winner&#34;: self.player1,
+                &#34;score&#34;: self.score1
+                }
+        else:
+            winner_table = {
+                &#34;winner&#34;: self.player2,
+                &#34;score&#34;: self.score2
+                }
+        return winner_table
+
+    def get_winner(self, score):
+        &#34;&#34;&#34;Get the winner of the game.&#34;&#34;&#34;
+        game_over = self.increment_and_determine(score,
+                                                 self.get_current_player()
+                                                 .turn_total)
+        if game_over:
+            winner_table = self.winner()
+        else:
+            winner_table = {}
+
+        return winner_table
+
+    def check_end_of_game(self, score):
+        &#34;&#34;&#34;Check if the game is over. If it is, display the winner.&#34;&#34;&#34;
+        winner_table = self.get_winner(score)
+
+        if winner_table:
+            # save highscore
+            self.update_highscores(winner_table[&#34;winner&#34;])
+            self.display_game_over(winner_table[&#34;winner&#34;],
+                                   winner_table[&#34;score&#34;])
+        else:
+            self.get_current_player().turn_total = 0
+
+            if (isinstance(self.player2, Intelligence) and
+               not isinstance(self.get_current_player(), Intelligence)):
+                self.play_computer_turn()
+                return
+            else:
+                self.change_turn()
+
+            print(self.start(self.player1, self.player2))
+
+    def display_game_over(self, winner, score):
+        &#34;&#34;&#34;Display the game over screen.&#34;&#34;&#34;
+        self.clear_terminal()
+        empty_line = f&#34;|{&#39; &#39; * MENU_WIDTH}|\n&#34;
+
+        print()
+        print(&#34;-&#34; * SCREEN_WIDTH)
+        print(f&#34;|{&#39;GAME OVER&#39;: ^{MENU_WIDTH}}|&#34;)
+        print(&#34;-&#34; * SCREEN_WIDTH)
+        print(empty_line * 6, end=&#39;&#39;)
+        print(f&#34;|{f&#39;{winner.get_name()} WON&#39;: ^{MENU_WIDTH}}|&#34;)
+        print(f&#34;|{f&#39;WITH {score} POINTS&#39;: ^{MENU_WIDTH}}|&#34;)
+        print(empty_line * 4, end=&#39;&#39;)
+        print(f&#34;|{&#39;restart OR quit&#39;: ^{MENU_WIDTH}}|&#34;)
+        print(empty_line, end=&#39;&#39;)
+        print(&#34;-&#34; * SCREEN_WIDTH)
+
+    def update_highscores(self, winner):
+        &#34;&#34;&#34;Update the highscores.&#34;&#34;&#34;
+        hs = Highscore(&#34;highscore.pkl2&#34;)
+        players = hs.load_highscore()
+        names = {player.get_name() for player in players}
+        current_names = [self.player1.get_name(), self.player2.get_name()]
+
+        for name in current_names:
+            if name in names:
+                for player in players:
+                    if player.get_name() == name:
+                        player.add_game()
+                        if player.get_name() == winner.get_name():
+                            player.add_win()
+            else:
+                if name != &#34;Computer&#34;:
+                    new_player = Player(name)
+                    new_player.add_game()
+                    if name == winner.get_name():
+                        new_player.add_win()
+                    players.append(new_player)
+
+        hs.save_highscore(players)
+
+    def cheat(self):
+        &#34;&#34;&#34;Add 50 to the current player&#39;s score to end the game faster.&#34;&#34;&#34;
+        if self.player1_turn:
+            self.score1 += 50
+        else:
+            self.score2 += 50
+
+    def set_score(self, score):
+        &#34;&#34;&#34;Set player scores.&#34;&#34;&#34;
+        if self.player1_turn:
+            self.score1 = score
+        else:
+            self.score2 = score
+
+    def get_winning_score(self):
+        &#34;&#34;&#34;Get the winnning score.&#34;&#34;&#34;
+        return self.winning_score</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="game2.Game"><code class="flex name class">
+<span>class <span class="ident">Game</span></span>
+<span>(</span><span>player1, player2, exit_menu)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Pig game with dice roll, increment and determine winner</p>
+<p>Constructor for single and 2 player game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Game(cmd.Cmd):
+    &#34;&#34;&#34;Pig game with dice roll, increment and determine winner&#34;&#34;&#34;
+
+    def __init__(self, player1, player2, exit_menu):
+        &#34;&#34;&#34;Constructor for single and 2 player game.&#34;&#34;&#34;
+        super().__init__()
+        self.player1 = player1
+        self.player2 = player2
+        self.dice = Dice(6)
+        self.winning_score = 100
+        self.score1 = 0
+        self.score2 = 0
+        self.player1_turn = True
+        self.current_roll = 1
+        self.exit_menu = exit_menu
+
+    prompt = textwrap.dedent(&#34;&#34;&#34;\
+        Type a valid command or &#39;help&#39; to see the existing commands.
+        &gt;&gt;&gt; &#34;&#34;&#34;)
+
+    def do_roll(self, arg):
+        &#34;&#34;&#34;Roll the dice and update the turn total.&#34;&#34;&#34;
+        self.current_roll = self.roll_dice()
+        match(self.current_roll):
+            case 1:
+                self.get_current_player().turn_total = 0
+                print(self.start(self.player1, self.player2))
+                time.sleep(1)
+                if isinstance(self.player2, Intelligence):
+                    self.play_computer_turn()
+                else:
+                    self.change_turn()
+            case _:
+                self.get_current_player().turn_total += self.current_roll
+
+        print(self.start(self.player1, self.player2))
+
+    def do_hold(self, arg):
+        &#34;&#34;&#34;Hold the current turn total and update the score.&#34;&#34;&#34;
+        if self.player1_turn:
+            self.check_end_of_game(self.score1)
+        else:
+            self.check_end_of_game(self.score2)
+
+    def do_edit_name(self, arg):
+        &#34;&#34;&#34;Edit the current player&#39;s name.&#34;&#34;&#34;
+        current_player = self.get_current_player()
+        new_name = input(&#34;Edit current player&#39;s name (&#34;
+                         + f&#34;{current_player.get_name()}) &gt;&gt;&gt; &#34;)
+
+        if current_player.get_name() == self.player1.get_name():
+            other_player = self.player2
+        else:
+            other_player = self.player1
+
+        current_player.change_name(new_name)
+
+        if other_player.get_name() == self.player1.get_name():
+            print(self.start(other_player, current_player))
+        else:
+            print(self.start(current_player, other_player))
+
+    def do_cheat(self, arg):
+        &#34;&#34;&#34;Cheat to end the game faster.&#34;&#34;&#34;
+        self.cheat()
+        if self.player1_turn:
+            self.check_end_of_game(self.score1)
+        else:
+            self.check_end_of_game(self.score2)
+
+    def do_restart(self, arg):
+        &#34;&#34;&#34;Restart the game.&#34;&#34;&#34;
+        self.score1 = 0
+        self.score2 = 0
+        self.player1.turn_total = 0
+        self.player2.turn_total = 0
+        self.clear_terminal()
+        self.cmdloop(self.start(self.player1, self.player2))
+
+    def do_quit(self, arg):
+        &#34;&#34;&#34;Quit the game.&#34;&#34;&#34;
+        self.clear_terminal()
+        self.exit_menu()
+        return True
+
+    def clear_terminal(self):
+        &#34;&#34;&#34;Clear the terminal.&#34;&#34;&#34;
+
+        if os.name == &#39;nt&#39;:
+            # For Windows
+            _ = os.system(&#39;cls&#39;)
+        else:
+            # For Unix-like systems (macOS, Linux)
+            _ = os.system(&#39;clear&#39;)
+
+    def start(self, player1, player2):
+        &#34;&#34;&#34;Display the main screen of the game.&#34;&#34;&#34;
+
+        self.clear_terminal()
+
+        die_side = DIE_SIDES[self.current_roll]
+        game = textwrap.dedent(f&#34;&#34;&#34;
+        {&#34;-&#34; * SCREEN_WIDTH}
+        |{&#34;PIG&#34;: ^{MENU_WIDTH}}|
+        {&#34;-&#34; * SCREEN_WIDTH}
+        |{&#34; &#34; * MENU_WIDTH}|
+        |    Player 1: {player1.name:17}Player 2: {player2.name:17}|
+        |    Score: {self.score1: &lt;20}Score: {self.score2:&lt;20}|
+        |{&#34; &#34; * MENU_WIDTH}|
+        |{&#34;DIE ROLL&#34;: ^{MENU_WIDTH}}|\
+        {die_side}
+        |{&#34; &#34; * MENU_WIDTH}|
+        |{self.get_current_player().name +&#34;&#39;s Turn&#34;: ^{MENU_WIDTH}}|
+        |{&#34;Turn Total: &#34; + str(self.get_current_player().turn_total)
+          : ^{MENU_WIDTH}}|
+        |{&#34;roll OR hold&#34;: ^{MENU_WIDTH}}|
+        |{&#34; &#34; * MENU_WIDTH}|
+        {&#34;-&#34; * SCREEN_WIDTH}
+        &#34;&#34;&#34;)
+
+        return game
+
+    def get_current_player(self):
+        &#34;&#34;&#34;Get the current player.&#34;&#34;&#34;
+        if self.player1_turn:
+            return self.player1
+
+        return self.player2
+
+    def change_turn(self):
+        &#34;&#34;&#34;Change the turn of the current player.&#34;&#34;&#34;
+        if self.player1_turn:
+            self.player1_turn = False
+        else:
+            self.player1_turn = True
+
+    def roll_dice(self):
+        &#34;&#34;&#34;A dice is rolled and an integer is returned.&#34;&#34;&#34;
+        return self.dice.roll()
+
+    def play_computer_turn(self):
+        &#34;&#34;&#34;Play the computer&#39;s turn.&#34;&#34;&#34;
+        self.change_turn()
+        self.player2.play(self)
+        self.check_end_of_game(self.score2)
+
+    def get_score_1(self):
+        &#34;&#34;&#34;Get player 1 score.&#34;&#34;&#34;
+        return self.score1
+
+    def get_score_2(self):
+        &#34;&#34;&#34;Get player 2 score.&#34;&#34;&#34;
+        return self.score2
+
+    def increment_and_determine(self, score, turn_total):
+        &#34;&#34;&#34;A score adder that checks if there is a winner,
+           if there is, the function returns True, else False.&#34;&#34;&#34;
+        score += turn_total
+        self.set_score(score)
+
+        game_over = self.has_won(score)
+        return game_over
+
+    def has_won(self, score):
+        &#34;&#34;&#34;Check if a player has won.&#34;&#34;&#34;
+        if score &gt;= self.get_winning_score():
+            return True
+
+        return False
+
+    def winner(self):
+        &#34;&#34;&#34;Generates a dictionary of a winner and score.&#34;&#34;&#34;
+        if self.score1 &gt; self.score2:
+            winner_table = {
+                &#34;winner&#34;: self.player1,
+                &#34;score&#34;: self.score1
+                }
+        else:
+            winner_table = {
+                &#34;winner&#34;: self.player2,
+                &#34;score&#34;: self.score2
+                }
+        return winner_table
+
+    def get_winner(self, score):
+        &#34;&#34;&#34;Get the winner of the game.&#34;&#34;&#34;
+        game_over = self.increment_and_determine(score,
+                                                 self.get_current_player()
+                                                 .turn_total)
+        if game_over:
+            winner_table = self.winner()
+        else:
+            winner_table = {}
+
+        return winner_table
+
+    def check_end_of_game(self, score):
+        &#34;&#34;&#34;Check if the game is over. If it is, display the winner.&#34;&#34;&#34;
+        winner_table = self.get_winner(score)
+
+        if winner_table:
+            # save highscore
+            self.update_highscores(winner_table[&#34;winner&#34;])
+            self.display_game_over(winner_table[&#34;winner&#34;],
+                                   winner_table[&#34;score&#34;])
+        else:
+            self.get_current_player().turn_total = 0
+
+            if (isinstance(self.player2, Intelligence) and
+               not isinstance(self.get_current_player(), Intelligence)):
+                self.play_computer_turn()
+                return
+            else:
+                self.change_turn()
+
+            print(self.start(self.player1, self.player2))
+
+    def display_game_over(self, winner, score):
+        &#34;&#34;&#34;Display the game over screen.&#34;&#34;&#34;
+        self.clear_terminal()
+        empty_line = f&#34;|{&#39; &#39; * MENU_WIDTH}|\n&#34;
+
+        print()
+        print(&#34;-&#34; * SCREEN_WIDTH)
+        print(f&#34;|{&#39;GAME OVER&#39;: ^{MENU_WIDTH}}|&#34;)
+        print(&#34;-&#34; * SCREEN_WIDTH)
+        print(empty_line * 6, end=&#39;&#39;)
+        print(f&#34;|{f&#39;{winner.get_name()} WON&#39;: ^{MENU_WIDTH}}|&#34;)
+        print(f&#34;|{f&#39;WITH {score} POINTS&#39;: ^{MENU_WIDTH}}|&#34;)
+        print(empty_line * 4, end=&#39;&#39;)
+        print(f&#34;|{&#39;restart OR quit&#39;: ^{MENU_WIDTH}}|&#34;)
+        print(empty_line, end=&#39;&#39;)
+        print(&#34;-&#34; * SCREEN_WIDTH)
+
+    def update_highscores(self, winner):
+        &#34;&#34;&#34;Update the highscores.&#34;&#34;&#34;
+        hs = Highscore(&#34;highscore.pkl2&#34;)
+        players = hs.load_highscore()
+        names = {player.get_name() for player in players}
+        current_names = [self.player1.get_name(), self.player2.get_name()]
+
+        for name in current_names:
+            if name in names:
+                for player in players:
+                    if player.get_name() == name:
+                        player.add_game()
+                        if player.get_name() == winner.get_name():
+                            player.add_win()
+            else:
+                if name != &#34;Computer&#34;:
+                    new_player = Player(name)
+                    new_player.add_game()
+                    if name == winner.get_name():
+                        new_player.add_win()
+                    players.append(new_player)
+
+        hs.save_highscore(players)
+
+    def cheat(self):
+        &#34;&#34;&#34;Add 50 to the current player&#39;s score to end the game faster.&#34;&#34;&#34;
+        if self.player1_turn:
+            self.score1 += 50
+        else:
+            self.score2 += 50
+
+    def set_score(self, score):
+        &#34;&#34;&#34;Set player scores.&#34;&#34;&#34;
+        if self.player1_turn:
+            self.score1 = score
+        else:
+            self.score2 = score
+
+    def get_winning_score(self):
+        &#34;&#34;&#34;Get the winnning score.&#34;&#34;&#34;
+        return self.winning_score</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>cmd.Cmd</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="game2.Game.prompt"><code class="name">var <span class="ident">prompt</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="game2.Game.change_turn"><code class="name flex">
+<span>def <span class="ident">change_turn</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Change the turn of the current player.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def change_turn(self):
+    &#34;&#34;&#34;Change the turn of the current player.&#34;&#34;&#34;
+    if self.player1_turn:
+        self.player1_turn = False
+    else:
+        self.player1_turn = True</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.cheat"><code class="name flex">
+<span>def <span class="ident">cheat</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Add 50 to the current player's score to end the game faster.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cheat(self):
+    &#34;&#34;&#34;Add 50 to the current player&#39;s score to end the game faster.&#34;&#34;&#34;
+    if self.player1_turn:
+        self.score1 += 50
+    else:
+        self.score2 += 50</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.check_end_of_game"><code class="name flex">
+<span>def <span class="ident">check_end_of_game</span></span>(<span>self, score)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the game is over. If it is, display the winner.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_end_of_game(self, score):
+    &#34;&#34;&#34;Check if the game is over. If it is, display the winner.&#34;&#34;&#34;
+    winner_table = self.get_winner(score)
+
+    if winner_table:
+        # save highscore
+        self.update_highscores(winner_table[&#34;winner&#34;])
+        self.display_game_over(winner_table[&#34;winner&#34;],
+                               winner_table[&#34;score&#34;])
+    else:
+        self.get_current_player().turn_total = 0
+
+        if (isinstance(self.player2, Intelligence) and
+           not isinstance(self.get_current_player(), Intelligence)):
+            self.play_computer_turn()
+            return
+        else:
+            self.change_turn()
+
+        print(self.start(self.player1, self.player2))</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.clear_terminal"><code class="name flex">
+<span>def <span class="ident">clear_terminal</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Clear the terminal.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear_terminal(self):
+    &#34;&#34;&#34;Clear the terminal.&#34;&#34;&#34;
+
+    if os.name == &#39;nt&#39;:
+        # For Windows
+        _ = os.system(&#39;cls&#39;)
+    else:
+        # For Unix-like systems (macOS, Linux)
+        _ = os.system(&#39;clear&#39;)</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.display_game_over"><code class="name flex">
+<span>def <span class="ident">display_game_over</span></span>(<span>self, winner, score)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display the game over screen.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def display_game_over(self, winner, score):
+    &#34;&#34;&#34;Display the game over screen.&#34;&#34;&#34;
+    self.clear_terminal()
+    empty_line = f&#34;|{&#39; &#39; * MENU_WIDTH}|\n&#34;
+
+    print()
+    print(&#34;-&#34; * SCREEN_WIDTH)
+    print(f&#34;|{&#39;GAME OVER&#39;: ^{MENU_WIDTH}}|&#34;)
+    print(&#34;-&#34; * SCREEN_WIDTH)
+    print(empty_line * 6, end=&#39;&#39;)
+    print(f&#34;|{f&#39;{winner.get_name()} WON&#39;: ^{MENU_WIDTH}}|&#34;)
+    print(f&#34;|{f&#39;WITH {score} POINTS&#39;: ^{MENU_WIDTH}}|&#34;)
+    print(empty_line * 4, end=&#39;&#39;)
+    print(f&#34;|{&#39;restart OR quit&#39;: ^{MENU_WIDTH}}|&#34;)
+    print(empty_line, end=&#39;&#39;)
+    print(&#34;-&#34; * SCREEN_WIDTH)</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.do_cheat"><code class="name flex">
+<span>def <span class="ident">do_cheat</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Cheat to end the game faster.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_cheat(self, arg):
+    &#34;&#34;&#34;Cheat to end the game faster.&#34;&#34;&#34;
+    self.cheat()
+    if self.player1_turn:
+        self.check_end_of_game(self.score1)
+    else:
+        self.check_end_of_game(self.score2)</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.do_edit_name"><code class="name flex">
+<span>def <span class="ident">do_edit_name</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Edit the current player's name.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_edit_name(self, arg):
+    &#34;&#34;&#34;Edit the current player&#39;s name.&#34;&#34;&#34;
+    current_player = self.get_current_player()
+    new_name = input(&#34;Edit current player&#39;s name (&#34;
+                     + f&#34;{current_player.get_name()}) &gt;&gt;&gt; &#34;)
+
+    if current_player.get_name() == self.player1.get_name():
+        other_player = self.player2
+    else:
+        other_player = self.player1
+
+    current_player.change_name(new_name)
+
+    if other_player.get_name() == self.player1.get_name():
+        print(self.start(other_player, current_player))
+    else:
+        print(self.start(current_player, other_player))</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.do_hold"><code class="name flex">
+<span>def <span class="ident">do_hold</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Hold the current turn total and update the score.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_hold(self, arg):
+    &#34;&#34;&#34;Hold the current turn total and update the score.&#34;&#34;&#34;
+    if self.player1_turn:
+        self.check_end_of_game(self.score1)
+    else:
+        self.check_end_of_game(self.score2)</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.do_quit"><code class="name flex">
+<span>def <span class="ident">do_quit</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Quit the game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_quit(self, arg):
+    &#34;&#34;&#34;Quit the game.&#34;&#34;&#34;
+    self.clear_terminal()
+    self.exit_menu()
+    return True</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.do_restart"><code class="name flex">
+<span>def <span class="ident">do_restart</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Restart the game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_restart(self, arg):
+    &#34;&#34;&#34;Restart the game.&#34;&#34;&#34;
+    self.score1 = 0
+    self.score2 = 0
+    self.player1.turn_total = 0
+    self.player2.turn_total = 0
+    self.clear_terminal()
+    self.cmdloop(self.start(self.player1, self.player2))</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.do_roll"><code class="name flex">
+<span>def <span class="ident">do_roll</span></span>(<span>self, arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Roll the dice and update the turn total.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def do_roll(self, arg):
+    &#34;&#34;&#34;Roll the dice and update the turn total.&#34;&#34;&#34;
+    self.current_roll = self.roll_dice()
+    match(self.current_roll):
+        case 1:
+            self.get_current_player().turn_total = 0
+            print(self.start(self.player1, self.player2))
+            time.sleep(1)
+            if isinstance(self.player2, Intelligence):
+                self.play_computer_turn()
+            else:
+                self.change_turn()
+        case _:
+            self.get_current_player().turn_total += self.current_roll
+
+    print(self.start(self.player1, self.player2))</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.get_current_player"><code class="name flex">
+<span>def <span class="ident">get_current_player</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get the current player.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_current_player(self):
+    &#34;&#34;&#34;Get the current player.&#34;&#34;&#34;
+    if self.player1_turn:
+        return self.player1
+
+    return self.player2</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.get_score_1"><code class="name flex">
+<span>def <span class="ident">get_score_1</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get player 1 score.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_score_1(self):
+    &#34;&#34;&#34;Get player 1 score.&#34;&#34;&#34;
+    return self.score1</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.get_score_2"><code class="name flex">
+<span>def <span class="ident">get_score_2</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get player 2 score.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_score_2(self):
+    &#34;&#34;&#34;Get player 2 score.&#34;&#34;&#34;
+    return self.score2</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.get_winner"><code class="name flex">
+<span>def <span class="ident">get_winner</span></span>(<span>self, score)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get the winner of the game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_winner(self, score):
+    &#34;&#34;&#34;Get the winner of the game.&#34;&#34;&#34;
+    game_over = self.increment_and_determine(score,
+                                             self.get_current_player()
+                                             .turn_total)
+    if game_over:
+        winner_table = self.winner()
+    else:
+        winner_table = {}
+
+    return winner_table</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.get_winning_score"><code class="name flex">
+<span>def <span class="ident">get_winning_score</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get the winnning score.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_winning_score(self):
+    &#34;&#34;&#34;Get the winnning score.&#34;&#34;&#34;
+    return self.winning_score</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.has_won"><code class="name flex">
+<span>def <span class="ident">has_won</span></span>(<span>self, score)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if a player has won.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def has_won(self, score):
+    &#34;&#34;&#34;Check if a player has won.&#34;&#34;&#34;
+    if score &gt;= self.get_winning_score():
+        return True
+
+    return False</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.increment_and_determine"><code class="name flex">
+<span>def <span class="ident">increment_and_determine</span></span>(<span>self, score, turn_total)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A score adder that checks if there is a winner,
+if there is, the function returns True, else False.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def increment_and_determine(self, score, turn_total):
+    &#34;&#34;&#34;A score adder that checks if there is a winner,
+       if there is, the function returns True, else False.&#34;&#34;&#34;
+    score += turn_total
+    self.set_score(score)
+
+    game_over = self.has_won(score)
+    return game_over</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.play_computer_turn"><code class="name flex">
+<span>def <span class="ident">play_computer_turn</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Play the computer's turn.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def play_computer_turn(self):
+    &#34;&#34;&#34;Play the computer&#39;s turn.&#34;&#34;&#34;
+    self.change_turn()
+    self.player2.play(self)
+    self.check_end_of_game(self.score2)</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.roll_dice"><code class="name flex">
+<span>def <span class="ident">roll_dice</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A dice is rolled and an integer is returned.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def roll_dice(self):
+    &#34;&#34;&#34;A dice is rolled and an integer is returned.&#34;&#34;&#34;
+    return self.dice.roll()</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.set_score"><code class="name flex">
+<span>def <span class="ident">set_score</span></span>(<span>self, score)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set player scores.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_score(self, score):
+    &#34;&#34;&#34;Set player scores.&#34;&#34;&#34;
+    if self.player1_turn:
+        self.score1 = score
+    else:
+        self.score2 = score</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.start"><code class="name flex">
+<span>def <span class="ident">start</span></span>(<span>self, player1, player2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display the main screen of the game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def start(self, player1, player2):
+    &#34;&#34;&#34;Display the main screen of the game.&#34;&#34;&#34;
+
+    self.clear_terminal()
+
+    die_side = DIE_SIDES[self.current_roll]
+    game = textwrap.dedent(f&#34;&#34;&#34;
+    {&#34;-&#34; * SCREEN_WIDTH}
+    |{&#34;PIG&#34;: ^{MENU_WIDTH}}|
+    {&#34;-&#34; * SCREEN_WIDTH}
+    |{&#34; &#34; * MENU_WIDTH}|
+    |    Player 1: {player1.name:17}Player 2: {player2.name:17}|
+    |    Score: {self.score1: &lt;20}Score: {self.score2:&lt;20}|
+    |{&#34; &#34; * MENU_WIDTH}|
+    |{&#34;DIE ROLL&#34;: ^{MENU_WIDTH}}|\
+    {die_side}
+    |{&#34; &#34; * MENU_WIDTH}|
+    |{self.get_current_player().name +&#34;&#39;s Turn&#34;: ^{MENU_WIDTH}}|
+    |{&#34;Turn Total: &#34; + str(self.get_current_player().turn_total)
+      : ^{MENU_WIDTH}}|
+    |{&#34;roll OR hold&#34;: ^{MENU_WIDTH}}|
+    |{&#34; &#34; * MENU_WIDTH}|
+    {&#34;-&#34; * SCREEN_WIDTH}
+    &#34;&#34;&#34;)
+
+    return game</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.update_highscores"><code class="name flex">
+<span>def <span class="ident">update_highscores</span></span>(<span>self, winner)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update the highscores.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_highscores(self, winner):
+    &#34;&#34;&#34;Update the highscores.&#34;&#34;&#34;
+    hs = Highscore(&#34;highscore.pkl2&#34;)
+    players = hs.load_highscore()
+    names = {player.get_name() for player in players}
+    current_names = [self.player1.get_name(), self.player2.get_name()]
+
+    for name in current_names:
+        if name in names:
+            for player in players:
+                if player.get_name() == name:
+                    player.add_game()
+                    if player.get_name() == winner.get_name():
+                        player.add_win()
+        else:
+            if name != &#34;Computer&#34;:
+                new_player = Player(name)
+                new_player.add_game()
+                if name == winner.get_name():
+                    new_player.add_win()
+                players.append(new_player)
+
+    hs.save_highscore(players)</code></pre>
+</details>
+</dd>
+<dt id="game2.Game.winner"><code class="name flex">
+<span>def <span class="ident">winner</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates a dictionary of a winner and score.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def winner(self):
+    &#34;&#34;&#34;Generates a dictionary of a winner and score.&#34;&#34;&#34;
+    if self.score1 &gt; self.score2:
+        winner_table = {
+            &#34;winner&#34;: self.player1,
+            &#34;score&#34;: self.score1
+            }
+    else:
+        winner_table = {
+            &#34;winner&#34;: self.player2,
+            &#34;score&#34;: self.score2
+            }
+    return winner_table</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="game2.Game" href="#game2.Game">Game</a></code></h4>
+<ul class="">
+<li><code><a title="game2.Game.change_turn" href="#game2.Game.change_turn">change_turn</a></code></li>
+<li><code><a title="game2.Game.cheat" href="#game2.Game.cheat">cheat</a></code></li>
+<li><code><a title="game2.Game.check_end_of_game" href="#game2.Game.check_end_of_game">check_end_of_game</a></code></li>
+<li><code><a title="game2.Game.clear_terminal" href="#game2.Game.clear_terminal">clear_terminal</a></code></li>
+<li><code><a title="game2.Game.display_game_over" href="#game2.Game.display_game_over">display_game_over</a></code></li>
+<li><code><a title="game2.Game.do_cheat" href="#game2.Game.do_cheat">do_cheat</a></code></li>
+<li><code><a title="game2.Game.do_edit_name" href="#game2.Game.do_edit_name">do_edit_name</a></code></li>
+<li><code><a title="game2.Game.do_hold" href="#game2.Game.do_hold">do_hold</a></code></li>
+<li><code><a title="game2.Game.do_quit" href="#game2.Game.do_quit">do_quit</a></code></li>
+<li><code><a title="game2.Game.do_restart" href="#game2.Game.do_restart">do_restart</a></code></li>
+<li><code><a title="game2.Game.do_roll" href="#game2.Game.do_roll">do_roll</a></code></li>
+<li><code><a title="game2.Game.get_current_player" href="#game2.Game.get_current_player">get_current_player</a></code></li>
+<li><code><a title="game2.Game.get_score_1" href="#game2.Game.get_score_1">get_score_1</a></code></li>
+<li><code><a title="game2.Game.get_score_2" href="#game2.Game.get_score_2">get_score_2</a></code></li>
+<li><code><a title="game2.Game.get_winner" href="#game2.Game.get_winner">get_winner</a></code></li>
+<li><code><a title="game2.Game.get_winning_score" href="#game2.Game.get_winning_score">get_winning_score</a></code></li>
+<li><code><a title="game2.Game.has_won" href="#game2.Game.has_won">has_won</a></code></li>
+<li><code><a title="game2.Game.increment_and_determine" href="#game2.Game.increment_and_determine">increment_and_determine</a></code></li>
+<li><code><a title="game2.Game.play_computer_turn" href="#game2.Game.play_computer_turn">play_computer_turn</a></code></li>
+<li><code><a title="game2.Game.prompt" href="#game2.Game.prompt">prompt</a></code></li>
+<li><code><a title="game2.Game.roll_dice" href="#game2.Game.roll_dice">roll_dice</a></code></li>
+<li><code><a title="game2.Game.set_score" href="#game2.Game.set_score">set_score</a></code></li>
+<li><code><a title="game2.Game.start" href="#game2.Game.start">start</a></code></li>
+<li><code><a title="game2.Game.update_highscores" href="#game2.Game.update_highscores">update_highscores</a></code></li>
+<li><code><a title="game2.Game.winner" href="#game2.Game.winner">winner</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
