@@ -4,6 +4,7 @@ import random
 
 class Dice:
     """Dice class for Pig game."""
+
     def __init__(self, num_of_sides):
         """Dice with any number of sides,
         set 6 for this game,

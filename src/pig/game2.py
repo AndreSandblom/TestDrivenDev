@@ -81,6 +81,7 @@ class Game(cmd.Cmd):
         >>> """)
 
     def do_roll(self, arg):
+        """Roll the dice and update the turn total."""
         self.current_roll = self.roll_dice()
         match(self.current_roll):
             case 1:
@@ -97,12 +98,14 @@ class Game(cmd.Cmd):
         print(self.start(self.player1, self.player2))
 
     def do_hold(self, arg):
+        """Hold the current turn total and update the score."""
         if self.player1_turn:
             self.check_end_of_game(self.score1)
         else:
             self.check_end_of_game(self.score2)
 
     def do_edit_name(self, arg):
+        """Edit the current player's name."""
         current_player = self.get_current_player()
         new_name = input("Edit current player's name ("
                          + f"{current_player.get_name()}) >>> ")
@@ -120,6 +123,7 @@ class Game(cmd.Cmd):
             print(self.start(current_player, other_player))
 
     def do_cheat(self, arg):
+        """Cheat to end the game faster."""
         self.cheat()
         if self.player1_turn:
             self.check_end_of_game(self.score1)
@@ -127,6 +131,7 @@ class Game(cmd.Cmd):
             self.check_end_of_game(self.score2)
 
     def do_restart(self, arg):
+        """Restart the game."""
         self.score1 = 0
         self.score2 = 0
         self.player1.turn_total = 0
@@ -135,6 +140,7 @@ class Game(cmd.Cmd):
         self.cmdloop(self.start(self.player1, self.player2))
 
     def do_quit(self, arg):
+        """Quit the game."""
         self.clear_terminal()
         self.exit_menu()
         return True
@@ -177,12 +183,14 @@ class Game(cmd.Cmd):
         return game
 
     def get_current_player(self):
+        """Get the current player."""
         if self.player1_turn:
             return self.player1
 
         return self.player2
 
     def change_turn(self):
+        """Change the turn of the current player."""
         if self.player1_turn:
             self.player1_turn = False
         else:
@@ -193,6 +201,7 @@ class Game(cmd.Cmd):
         return self.dice.roll()
 
     def play_computer_turn(self):
+        """Play the computer's turn."""
         self.change_turn()
         self.player2.play(self)
         self.check_end_of_game(self.score2)
@@ -236,6 +245,7 @@ class Game(cmd.Cmd):
         return winner_table
 
     def get_winner(self, score):
+        """Get the winner of the game."""
         game_over = self.increment_and_determine(score,
                                                  self.get_current_player()
                                                  .turn_total)
@@ -247,6 +257,7 @@ class Game(cmd.Cmd):
         return winner_table
 
     def check_end_of_game(self, score):
+        """Check if the game is over. If it is, display the winner."""
         winner_table = self.get_winner(score)
 
         if winner_table:
@@ -267,6 +278,7 @@ class Game(cmd.Cmd):
             print(self.start(self.player1, self.player2))
 
     def display_game_over(self, winner, score):
+        """Display the game over screen."""
         self.clear_terminal()
         empty_line = f"|{' ' * MENU_WIDTH}|\n"
 
@@ -283,6 +295,7 @@ class Game(cmd.Cmd):
         print("-" * SCREEN_WIDTH)
 
     def update_highscores(self, winner):
+        """Update the highscores."""
         hs = Highscore("highscore.pkl2")
         players = hs.load_highscore()
         names = {player.get_name() for player in players}

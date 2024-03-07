@@ -1,4 +1,5 @@
 """Test the Dice class."""
+
 import unittest
 from dice import Dice
 
@@ -19,3 +20,7 @@ class TestDice(unittest.TestCase):
         returned = self.dice.roll()
         expected = 1 <= returned <= 6
         self.assertTrue(expected)
+
+
+if __name__ == "__main__":
+    unittest.main()
