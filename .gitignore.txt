@@ -1,4 +1,4 @@
 .venv/
-src/pig/__pycache__/
-testCMD.py
-testShell/
+/src/pig/__pycache__/
+/testCMD.py
+/testShell/
