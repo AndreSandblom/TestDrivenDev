@@ -12,13 +12,13 @@ class Player:
         self.turn_total = 0
 
     def __str__(self) -> str:
-        return f'Player: {self.name}'
+        return f"Player: {self.name}"
 
     def get_player_score(self):
         """Return the player's name, played and won games."""
-        score_info = f'Player: {self.name}\n'
-        score_info += f'Amount of games: {self.played_games}\n'
-        score_info += f'Amount of won games: {self.won_games}\n'
+        score_info = f"Player: {self.name}\n"
+        score_info += f"Amount of games: {self.played_games}\n"
+        score_info += f"Amount of won games: {self.won_games}\n"
         return score_info
 
     def add_game(self):

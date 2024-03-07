@@ -12,27 +12,32 @@ LEFT_PADDING = 20
 
 class ModeMenu(cmd.Cmd):
 
-    def __init__(self, main_menu):
+    def __init__(self, main_menu, exit_menu):
         super().__init__()
         self.main_menu = main_menu
+        self.exit_menu = exit_menu
 
-    prompt = "Select an option >>> "
+    prompt = textwrap.dedent("""\
+        Type a valid command or 'help' to see the existing commands.
+        >>> """)
 
     def do_one(self, arg):
-        difficulty = DifficultyMenu(self.display_mode_menu())
-        DifficultyMenu(self.display_mode_menu()).cmdloop(difficulty.display_difficulty_menu())
+        difficulty = DifficultyMenu(self.display_mode_menu(), self.exit_menu)
+        difficulty.cmdloop(difficulty.display_difficulty_menu())
 
     def do_two(self, arg):
-        player1 = Player(input("Enter the name for Player 1 >>> "))
-        player2 = Player(input("Enter the name for Player 2 >>> "))
+        player1 = Player(input("Enter the name for Player 1 >>> ")
+                         .capitalize())
+        player2 = Player(input("Enter the name for Player 2 >>> ").
+                         capitalize())
 
-        game = Game(player1, player2)
-        Game(player1, player2).cmdloop(game.start(player1, player2))
+        game = Game(player1, player2, self.exit_menu)
+        game.cmdloop(game.start(player1, player2))
 
     def do_back(self, arg):
         self.clear_terminal()
         print(self.main_menu)
-        return True
+        return True, arg
 
     def clear_terminal(self):
         """Clear the terminal."""
@@ -70,3 +75,4 @@ class ModeMenu(cmd.Cmd):
         """)
 
         return mode_menu
+
