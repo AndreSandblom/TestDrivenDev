@@ -108,7 +108,7 @@ class Game(cmd.Cmd):
         """Edit the current player's name."""
         current_player = self.get_current_player()
         new_name = input("Edit current player's name ("
-                         + f"{current_player.get_name()}) >>> ")
+                         + f"{current_player.get_name()}) >>> ").capitalize()
 
         if current_player.get_name() == self.player1.get_name():
             other_player = self.player2
