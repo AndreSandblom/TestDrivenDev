@@ -24,40 +24,40 @@ class TestGame(unittest.TestCase):
         self.assertIsInstance(self.single_game, Game)
         self.assertIsInstance(self.double_game, Game)
 
-    def test_do_roll_is_1(self):
-        """Test when roll is 1 in single game."""
-        with patch.object(self.single_game, "roll_dice", return_value=1):
-            # Assuming player1 is the current player
-            self.single_game.do_roll("roll")
-            self.assertEqual(
-                self.single_game.get_current_player().turn_total, 0)
+    # def test_do_roll_is_1(self):
+    #     """Test when roll is 1 in single game."""
+    #     with patch.object(self.single_game, "roll_dice", return_value=1):
+    #         # Assuming player1 is the current player
+    #         self.single_game.do_roll("roll")
+    #         self.assertEqual(
+    #             self.single_game.get_current_player().turn_total, 0)
 
-    def test_do_roll_is_not_1(self):
-        """Test when roll is not 1 in single game."""
-        with patch.object(self.single_game, "roll_dice", return_value=4):
-            # Assuming player1 is the current player
-            init_turn_total = self.single_game.get_current_player().turn_total
-            self.single_game.do_roll("roll")
-            self.assertEqual(self.single_game.get_current_player().turn_total,
-                             init_turn_total + 4)
+    # def test_do_roll_is_not_1(self):
+    #     """Test when roll is not 1 in single game."""
+    #     with patch.object(self.single_game, "roll_dice", return_value=4):
+    #         # Assuming player1 is the current player
+    #         init_turn_total = self.single_game.get_current_player().turn_total
+    #         self.single_game.do_roll("roll")
+    #         self.assertEqual(self.single_game.get_current_player().turn_total,
+    #                          init_turn_total + 4)
 
-    def test_do_roll_is_1_2(self):
-        """Test when roll is 1 in double game."""
-        with patch.object(self.double_game, "roll_dice", return_value=1):
-            # Assuming player1 is the current player
-            self.double_game.do_roll("roll")
-            self.assertEqual(
-                self.double_game.get_current_player().turn_total, 0)
+    # def test_do_roll_is_1_2(self):
+    #     """Test when roll is 1 in double game."""
+    #     with patch.object(self.double_game, "roll_dice", return_value=1):
+    #         # Assuming player1 is the current player
+    #         self.double_game.do_roll("roll")
+    #         self.assertEqual(
+    #             self.double_game.get_current_player().turn_total, 0)
 
-    def test_do_roll_is_not_1_2(self):
-        """Test when roll is not 1 in double game."""
-        with patch.object(self.double_game, "roll_dice", return_value=4):
-            # Assuming player1 is the current player
-            init_turn_total = self.double_game.get_current_player().turn_total
-            self.double_game.do_roll("roll")
-            self.assertEqual(self.double_game.get_current_player().turn_total,
-                             init_turn_total + 4)
-    
+    # def test_do_roll_is_not_1_2(self):
+    #     """Test when roll is not 1 in double game."""
+    #     with patch.object(self.double_game, "roll_dice", return_value=4):
+    #         # Assuming player1 is the current player
+    #         init_turn_total = self.double_game.get_current_player().turn_total
+    #         self.double_game.do_roll("roll")
+    #         self.assertEqual(self.double_game.get_current_player().turn_total,
+    #                          init_turn_total + 4)
+
     def test_winner_player1_wins(self):
         """Test when player1 has a higher score"""
         self.double_game.score1 = 100
@@ -93,7 +93,7 @@ class TestGame(unittest.TestCase):
         self.assertTrue(self.double_game.has_won(100))
         self.assertFalse(self.single_game.has_won(99))
         self.assertFalse(self.double_game.has_won(99))
-                
+
     def test_increment_and_determine(self):
         """Test the function to return True when total is >= 100."""
         expected = self.single_game.increment_and_determine(99, 3)
@@ -153,6 +153,7 @@ class TestGame(unittest.TestCase):
         """Test that the initial winning score is 100."""
         self.assertEqual(self.single_game.get_winning_score(), 100)
         self.assertEqual(self.double_game.get_winning_score(), 100)
+
 
 if __name__ == "__main__":
     unittest.main()

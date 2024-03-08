@@ -11,26 +11,31 @@ LEFT_PADDING = 23
 
 
 class MainMenu(cmd.Cmd):
-
+    """The main menu for the game."""
     prompt = textwrap.dedent("""\
         Type a valid command or 'help' to see the existing commands.
         >>> """)
     file = "highscore.pkl2"
 
     def do_start(self, arg):
+        """Start the game."""
         mode = ModeMenu(self.display_main_menu(), self.exit_game)
         mode.cmdloop(mode.display_mode_menu())
 
     def do_rules(self, arg):
+        """Read the rules of the game."""
         self.display_rules()
 
     def do_highscores(self, arg):
+        """Display the high scores."""
         self.display_highscores()
 
     def do_exit(self, arg):
+        """Exit the game."""
         self.exit_game()
 
     def do_menu(self, arg):
+        """Return to the main menu."""
         self.clear_terminal()
         self.cmdloop()
 
@@ -97,6 +102,7 @@ class MainMenu(cmd.Cmd):
         print()
 
     def display_highscores(self):
+        """Display the high scores."""
         hs = Highscore(self.file)
         highscores = hs.load_highscore()
 
@@ -124,7 +130,7 @@ class MainMenu(cmd.Cmd):
                 print("|" + " " * 10 + f"{'-----':15}"
                       + f"{'0':15}"
                       + f"{'0': <{MENU_WIDTH-40}}" + "|")
-        
+
         print(f"|{' ' * MENU_WIDTH}|")
         print(f"|{'Enter menu to go back':^{MENU_WIDTH}}|")
         print(f"|{' ' * MENU_WIDTH}|")

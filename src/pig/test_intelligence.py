@@ -14,7 +14,7 @@ class TestIntelligence(unittest.TestCase):
         self.intelligence2 = Intelligence("normal", "ComputerNormal")
         self.intelligence3 = Intelligence("hard", "ComputerHard")
         self.player = Player("Player2")
-        self.game = Game(self.intelligence3, "Player2")
+        self.game = Game(self.intelligence3, "Player2", exit_menu=False)
         self.dice = Dice(6)
 
     def test_intelligence_instance(self):

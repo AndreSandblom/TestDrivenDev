@@ -1,3 +1,4 @@
+"""Main module for the Pig game."""
 from main_menu import MainMenu
 
 if __name__ == "__main__":

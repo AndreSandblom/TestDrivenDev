@@ -25,6 +25,7 @@ class Intelligence(Player):
             time.sleep(1)
 
     def check_roll(self, roll_number):
+        """Check the roll number and update the turn total."""
         match(roll_number):
             case 1:
                 self.turn_total = 0
@@ -34,6 +35,7 @@ class Intelligence(Player):
         return self.turn_total
 
     def check_difficulty_action(self, game):
+        """Check the difficulty and decide the computer's action."""
         match(self.difficulty):
             case "easy":
                 if self.turn_total >= 20:

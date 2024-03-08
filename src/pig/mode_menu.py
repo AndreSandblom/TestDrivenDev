@@ -1,3 +1,4 @@
+"""This module contains the Mode Menu class."""
 import os
 import cmd
 import textwrap
@@ -11,7 +12,7 @@ LEFT_PADDING = 20
 
 
 class ModeMenu(cmd.Cmd):
-
+    """The mode menu for the game."""
     def __init__(self, main_menu, exit_menu):
         super().__init__()
         self.main_menu = main_menu
@@ -22,10 +23,12 @@ class ModeMenu(cmd.Cmd):
         >>> """)
 
     def do_one(self, arg):
+        """Start a single player game."""
         difficulty = DifficultyMenu(self.display_mode_menu(), self.exit_menu)
         difficulty.cmdloop(difficulty.display_difficulty_menu())
 
     def do_two(self, arg):
+        """Start a two player game."""
         player1 = Player(input("Enter the name for Player 1 >>> ")
                          .capitalize())
         player2 = Player(input("Enter the name for Player 2 >>> ").
@@ -35,6 +38,7 @@ class ModeMenu(cmd.Cmd):
         game.cmdloop(game.start(player1, player2))
 
     def do_back(self, arg):
+        """Go back to the main menu."""
         self.clear_terminal()
         print(self.main_menu)
         return True, arg
@@ -75,4 +79,3 @@ class ModeMenu(cmd.Cmd):
         """)
 
         return mode_menu
-

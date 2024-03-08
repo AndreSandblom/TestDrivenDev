@@ -1,4 +1,5 @@
 """File to test methods"""
+
 import unittest
 import os
 from highscore import Highscore
@@ -10,8 +11,8 @@ class TestHighscore(unittest.TestCase):
 
     def setUp(self):
         """Create two players for testing."""
-        self.player_list = [Player('Nisse'), Player('Stina')]
-        self.path_name = 'test.file'
+        self.player_list = [Player("Nisse"), Player("Stina")]
+        self.path_name = "test.file"
         self.test_file = Highscore(self.path_name)
         self.player1 = Player("Player1")
         self.player2 = Player("Player2")
@@ -48,7 +49,7 @@ class TestHighscore(unittest.TestCase):
         self.player2.add_win()
         self.player1.add_win()
         test_list2 = self.test_file.sort_player_highscore(test_list1)
-        self.assertEqual(test_list2[0].name, 'Player2')
+        self.assertEqual(test_list2[0].name, "Player2")
 
 
 if __name__ == "__main__":
