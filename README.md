@@ -31,19 +31,21 @@ This repository contains a Python implementation of the Pig dice game, a simple 
 
 1. Clone the repository to your local machine.
 2. Navigate to the project directory in GitBash.
-3. Run `make version` to check the Python version being used.
-4. Run `make venv` to create the virtual environment folder.
-5. Run `. .venv/Scripts/activate` to activate the virtual environment and work inside it.
-5. Run `make install` to install all tools included in the `requirements.txt` file.
-6. Run `make installed` to verify that all necessary tools have been installed.
-7. Navigate to the directory `/src/pig`.
-8. Run `python -m main` in Windows Powershell or
-9. In GitBash and run `code .` to open Visual Studio Code and run the `main.py` file to start the game.
-10. Follow the on-screen instructions to play the game.
+3. Install the Windows package manager [Chocolatey](https://chocolatey.org/install#individual)
+4. Run `choco install make`.
+5. Run `make version` to check the Python version being used and to check the `make` command works.
+6. Run `make venv` to create the virtual environment folder.
+7. Run `. .venv/Scripts/activate` to activate the virtual environment and work inside it.
+6. Run `make install` to install all tools included in the `requirements.txt` file.
+7. Run `make installed` to verify that all necessary tools have been installed.
+10. Navigate to the directory `/src/pig`.
+11. Run `python -m main` in Windows Powershell or
+12. In GitBash and run `code .` to open Visual Studio Code and run the `main.py` file to start the game.
+13. Follow the on-screen instructions to play the game.
 
 ## Testing
 
-To run the complete test suite and generate a coverage report, use the following commands inside the TestDrivenDev folder:
+To run the complete test suite and generate a coverage report, use the following commands inside the TestDrivenDev folder while the virtual environment is activated (Step 7 from Installation):
 
 ```bash
 make test
@@ -74,8 +76,15 @@ The UML diagrams for classes and packages are found in `src/pig/doc/uml`.
 To regenerate the UML diagrams of the documentation, follow these steps:
 
 1. Navigate to the project directory `src/pig/`.
-2. Run the following command:
+2. Install GraphViz package by running command `choco instal graphviz` in Windows Powershell.
+3. Run the following command:
 
 ```bash
 make pyreverse
 ```
+
+## Deactivate virtual environment (venv)
+
+In order to deactivate the virtual environment when done with using the project, the following command should be run:
+
+```deactivate```
