@@ -65,11 +65,11 @@ The UML diagrams for classes and packages are found in `src/pig/doc/uml`.
 
 ### Class Diagram
 
-<img src="src/pig/doc/pyreverse/classes.png">
+<img src="src/pig/doc/uml/classes.png">
 
 ### Package Diagram
 
-<img src="src/pig/doc/pyreverse/packages.png">
+<img src="src/pig/doc/uml/packages.png">
 
 To regenerate the UML diagrams of the documentation, follow these steps:
 
