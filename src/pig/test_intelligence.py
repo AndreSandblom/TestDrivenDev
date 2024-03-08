@@ -1,7 +1,7 @@
 """Unit tests for the intelligence module."""
 import unittest
 from intelligence import Intelligence
-from game2 import Game
+from game import Game
 from dice import Dice
 from player import Player
 

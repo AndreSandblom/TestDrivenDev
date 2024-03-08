@@ -5,7 +5,7 @@ import textwrap
 from difficulty_menu import DifficultyMenu
 from player import Player
 # from game import Game
-from game2 import Game
+from game import Game
 SCREEN_WIDTH = 60
 MENU_WIDTH = SCREEN_WIDTH - 2
 LEFT_PADDING = 20
