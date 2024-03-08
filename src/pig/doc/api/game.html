@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>game2 API documentation</title>
+<title>game API documentation</title>
 <meta name="description" content="Game class: Single Player &amp; 2 Players modes
 Pig game with dice roll, increment and determine winner
 and cheat etc functions" />
@@ -21,7 +21,7 @@ and cheat etc functions" />
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>game2</code></h1>
+<h1 class="title">Module <code>game</code></h1>
 </header>
 <section id="section-intro">
 <p>Game class: Single Player &amp; 2 Players modes
@@ -141,7 +141,7 @@ class Game(cmd.Cmd):
         &#34;&#34;&#34;Edit the current player&#39;s name.&#34;&#34;&#34;
         current_player = self.get_current_player()
         new_name = input(&#34;Edit current player&#39;s name (&#34;
-                         + f&#34;{current_player.get_name()}) &gt;&gt;&gt; &#34;)
+                         + f&#34;{current_player.get_name()}) &gt;&gt;&gt; &#34;).capitalize()
 
         if current_player.get_name() == self.player1.get_name():
             other_player = self.player2
@@ -379,7 +379,7 @@ class Game(cmd.Cmd):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="game2.Game"><code class="flex name class">
+<dt id="game.Game"><code class="flex name class">
 <span>class <span class="ident">Game</span></span>
 <span>(</span><span>player1, player2, exit_menu)</span>
 </code></dt>
@@ -438,7 +438,7 @@ class Game(cmd.Cmd):
         &#34;&#34;&#34;Edit the current player&#39;s name.&#34;&#34;&#34;
         current_player = self.get_current_player()
         new_name = input(&#34;Edit current player&#39;s name (&#34;
-                         + f&#34;{current_player.get_name()}) &gt;&gt;&gt; &#34;)
+                         + f&#34;{current_player.get_name()}) &gt;&gt;&gt; &#34;).capitalize()
 
         if current_player.get_name() == self.player1.get_name():
             other_player = self.player2
@@ -672,14 +672,14 @@ class Game(cmd.Cmd):
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="game2.Game.prompt"><code class="name">var <span class="ident">prompt</span></code></dt>
+<dt id="game.Game.prompt"><code class="name">var <span class="ident">prompt</span></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="game2.Game.change_turn"><code class="name flex">
+<dt id="game.Game.change_turn"><code class="name flex">
 <span>def <span class="ident">change_turn</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -696,7 +696,7 @@ class Game(cmd.Cmd):
         self.player1_turn = True</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.cheat"><code class="name flex">
+<dt id="game.Game.cheat"><code class="name flex">
 <span>def <span class="ident">cheat</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -713,7 +713,7 @@ class Game(cmd.Cmd):
         self.score2 += 50</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.check_end_of_game"><code class="name flex">
+<dt id="game.Game.check_end_of_game"><code class="name flex">
 <span>def <span class="ident">check_end_of_game</span></span>(<span>self, score)</span>
 </code></dt>
 <dd>
@@ -744,7 +744,7 @@ class Game(cmd.Cmd):
         print(self.start(self.player1, self.player2))</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.clear_terminal"><code class="name flex">
+<dt id="game.Game.clear_terminal"><code class="name flex">
 <span>def <span class="ident">clear_terminal</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -764,7 +764,7 @@ class Game(cmd.Cmd):
         _ = os.system(&#39;clear&#39;)</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.display_game_over"><code class="name flex">
+<dt id="game.Game.display_game_over"><code class="name flex">
 <span>def <span class="ident">display_game_over</span></span>(<span>self, winner, score)</span>
 </code></dt>
 <dd>
@@ -791,7 +791,7 @@ class Game(cmd.Cmd):
     print(&#34;-&#34; * SCREEN_WIDTH)</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.do_cheat"><code class="name flex">
+<dt id="game.Game.do_cheat"><code class="name flex">
 <span>def <span class="ident">do_cheat</span></span>(<span>self, arg)</span>
 </code></dt>
 <dd>
@@ -809,7 +809,7 @@ class Game(cmd.Cmd):
         self.check_end_of_game(self.score2)</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.do_edit_name"><code class="name flex">
+<dt id="game.Game.do_edit_name"><code class="name flex">
 <span>def <span class="ident">do_edit_name</span></span>(<span>self, arg)</span>
 </code></dt>
 <dd>
@@ -822,7 +822,7 @@ class Game(cmd.Cmd):
     &#34;&#34;&#34;Edit the current player&#39;s name.&#34;&#34;&#34;
     current_player = self.get_current_player()
     new_name = input(&#34;Edit current player&#39;s name (&#34;
-                     + f&#34;{current_player.get_name()}) &gt;&gt;&gt; &#34;)
+                     + f&#34;{current_player.get_name()}) &gt;&gt;&gt; &#34;).capitalize()
 
     if current_player.get_name() == self.player1.get_name():
         other_player = self.player2
@@ -837,7 +837,7 @@ class Game(cmd.Cmd):
         print(self.start(current_player, other_player))</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.do_hold"><code class="name flex">
+<dt id="game.Game.do_hold"><code class="name flex">
 <span>def <span class="ident">do_hold</span></span>(<span>self, arg)</span>
 </code></dt>
 <dd>
@@ -854,7 +854,7 @@ class Game(cmd.Cmd):
         self.check_end_of_game(self.score2)</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.do_quit"><code class="name flex">
+<dt id="game.Game.do_quit"><code class="name flex">
 <span>def <span class="ident">do_quit</span></span>(<span>self, arg)</span>
 </code></dt>
 <dd>
@@ -870,7 +870,7 @@ class Game(cmd.Cmd):
     return True</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.do_restart"><code class="name flex">
+<dt id="game.Game.do_restart"><code class="name flex">
 <span>def <span class="ident">do_restart</span></span>(<span>self, arg)</span>
 </code></dt>
 <dd>
@@ -889,7 +889,7 @@ class Game(cmd.Cmd):
     self.cmdloop(self.start(self.player1, self.player2))</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.do_roll"><code class="name flex">
+<dt id="game.Game.do_roll"><code class="name flex">
 <span>def <span class="ident">do_roll</span></span>(<span>self, arg)</span>
 </code></dt>
 <dd>
@@ -916,7 +916,7 @@ class Game(cmd.Cmd):
     print(self.start(self.player1, self.player2))</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.get_current_player"><code class="name flex">
+<dt id="game.Game.get_current_player"><code class="name flex">
 <span>def <span class="ident">get_current_player</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -933,7 +933,7 @@ class Game(cmd.Cmd):
     return self.player2</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.get_score_1"><code class="name flex">
+<dt id="game.Game.get_score_1"><code class="name flex">
 <span>def <span class="ident">get_score_1</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -947,7 +947,7 @@ class Game(cmd.Cmd):
     return self.score1</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.get_score_2"><code class="name flex">
+<dt id="game.Game.get_score_2"><code class="name flex">
 <span>def <span class="ident">get_score_2</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -961,7 +961,7 @@ class Game(cmd.Cmd):
     return self.score2</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.get_winner"><code class="name flex">
+<dt id="game.Game.get_winner"><code class="name flex">
 <span>def <span class="ident">get_winner</span></span>(<span>self, score)</span>
 </code></dt>
 <dd>
@@ -983,7 +983,7 @@ class Game(cmd.Cmd):
     return winner_table</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.get_winning_score"><code class="name flex">
+<dt id="game.Game.get_winning_score"><code class="name flex">
 <span>def <span class="ident">get_winning_score</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -997,7 +997,7 @@ class Game(cmd.Cmd):
     return self.winning_score</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.has_won"><code class="name flex">
+<dt id="game.Game.has_won"><code class="name flex">
 <span>def <span class="ident">has_won</span></span>(<span>self, score)</span>
 </code></dt>
 <dd>
@@ -1014,7 +1014,7 @@ class Game(cmd.Cmd):
     return False</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.increment_and_determine"><code class="name flex">
+<dt id="game.Game.increment_and_determine"><code class="name flex">
 <span>def <span class="ident">increment_and_determine</span></span>(<span>self, score, turn_total)</span>
 </code></dt>
 <dd>
@@ -1034,7 +1034,7 @@ if there is, the function returns True, else False.</p></div>
     return game_over</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.play_computer_turn"><code class="name flex">
+<dt id="game.Game.play_computer_turn"><code class="name flex">
 <span>def <span class="ident">play_computer_turn</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -1050,7 +1050,7 @@ if there is, the function returns True, else False.</p></div>
     self.check_end_of_game(self.score2)</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.roll_dice"><code class="name flex">
+<dt id="game.Game.roll_dice"><code class="name flex">
 <span>def <span class="ident">roll_dice</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -1064,7 +1064,7 @@ if there is, the function returns True, else False.</p></div>
     return self.dice.roll()</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.set_score"><code class="name flex">
+<dt id="game.Game.set_score"><code class="name flex">
 <span>def <span class="ident">set_score</span></span>(<span>self, score)</span>
 </code></dt>
 <dd>
@@ -1081,7 +1081,7 @@ if there is, the function returns True, else False.</p></div>
         self.score2 = score</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.start"><code class="name flex">
+<dt id="game.Game.start"><code class="name flex">
 <span>def <span class="ident">start</span></span>(<span>self, player1, player2)</span>
 </code></dt>
 <dd>
@@ -1118,7 +1118,7 @@ if there is, the function returns True, else False.</p></div>
     return game</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.update_highscores"><code class="name flex">
+<dt id="game.Game.update_highscores"><code class="name flex">
 <span>def <span class="ident">update_highscores</span></span>(<span>self, winner)</span>
 </code></dt>
 <dd>
@@ -1152,7 +1152,7 @@ if there is, the function returns True, else False.</p></div>
     hs.save_highscore(players)</code></pre>
 </details>
 </dd>
-<dt id="game2.Game.winner"><code class="name flex">
+<dt id="game.Game.winner"><code class="name flex">
 <span>def <span class="ident">winner</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -1190,33 +1190,33 @@ if there is, the function returns True, else False.</p></div>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="game2.Game" href="#game2.Game">Game</a></code></h4>
+<h4><code><a title="game.Game" href="#game.Game">Game</a></code></h4>
 <ul class="">
-<li><code><a title="game2.Game.change_turn" href="#game2.Game.change_turn">change_turn</a></code></li>
-<li><code><a title="game2.Game.cheat" href="#game2.Game.cheat">cheat</a></code></li>
-<li><code><a title="game2.Game.check_end_of_game" href="#game2.Game.check_end_of_game">check_end_of_game</a></code></li>
-<li><code><a title="game2.Game.clear_terminal" href="#game2.Game.clear_terminal">clear_terminal</a></code></li>
-<li><code><a title="game2.Game.display_game_over" href="#game2.Game.display_game_over">display_game_over</a></code></li>
-<li><code><a title="game2.Game.do_cheat" href="#game2.Game.do_cheat">do_cheat</a></code></li>
-<li><code><a title="game2.Game.do_edit_name" href="#game2.Game.do_edit_name">do_edit_name</a></code></li>
-<li><code><a title="game2.Game.do_hold" href="#game2.Game.do_hold">do_hold</a></code></li>
-<li><code><a title="game2.Game.do_quit" href="#game2.Game.do_quit">do_quit</a></code></li>
-<li><code><a title="game2.Game.do_restart" href="#game2.Game.do_restart">do_restart</a></code></li>
-<li><code><a title="game2.Game.do_roll" href="#game2.Game.do_roll">do_roll</a></code></li>
-<li><code><a title="game2.Game.get_current_player" href="#game2.Game.get_current_player">get_current_player</a></code></li>
-<li><code><a title="game2.Game.get_score_1" href="#game2.Game.get_score_1">get_score_1</a></code></li>
-<li><code><a title="game2.Game.get_score_2" href="#game2.Game.get_score_2">get_score_2</a></code></li>
-<li><code><a title="game2.Game.get_winner" href="#game2.Game.get_winner">get_winner</a></code></li>
-<li><code><a title="game2.Game.get_winning_score" href="#game2.Game.get_winning_score">get_winning_score</a></code></li>
-<li><code><a title="game2.Game.has_won" href="#game2.Game.has_won">has_won</a></code></li>
-<li><code><a title="game2.Game.increment_and_determine" href="#game2.Game.increment_and_determine">increment_and_determine</a></code></li>
-<li><code><a title="game2.Game.play_computer_turn" href="#game2.Game.play_computer_turn">play_computer_turn</a></code></li>
-<li><code><a title="game2.Game.prompt" href="#game2.Game.prompt">prompt</a></code></li>
-<li><code><a title="game2.Game.roll_dice" href="#game2.Game.roll_dice">roll_dice</a></code></li>
-<li><code><a title="game2.Game.set_score" href="#game2.Game.set_score">set_score</a></code></li>
-<li><code><a title="game2.Game.start" href="#game2.Game.start">start</a></code></li>
-<li><code><a title="game2.Game.update_highscores" href="#game2.Game.update_highscores">update_highscores</a></code></li>
-<li><code><a title="game2.Game.winner" href="#game2.Game.winner">winner</a></code></li>
+<li><code><a title="game.Game.change_turn" href="#game.Game.change_turn">change_turn</a></code></li>
+<li><code><a title="game.Game.cheat" href="#game.Game.cheat">cheat</a></code></li>
+<li><code><a title="game.Game.check_end_of_game" href="#game.Game.check_end_of_game">check_end_of_game</a></code></li>
+<li><code><a title="game.Game.clear_terminal" href="#game.Game.clear_terminal">clear_terminal</a></code></li>
+<li><code><a title="game.Game.display_game_over" href="#game.Game.display_game_over">display_game_over</a></code></li>
+<li><code><a title="game.Game.do_cheat" href="#game.Game.do_cheat">do_cheat</a></code></li>
+<li><code><a title="game.Game.do_edit_name" href="#game.Game.do_edit_name">do_edit_name</a></code></li>
+<li><code><a title="game.Game.do_hold" href="#game.Game.do_hold">do_hold</a></code></li>
+<li><code><a title="game.Game.do_quit" href="#game.Game.do_quit">do_quit</a></code></li>
+<li><code><a title="game.Game.do_restart" href="#game.Game.do_restart">do_restart</a></code></li>
+<li><code><a title="game.Game.do_roll" href="#game.Game.do_roll">do_roll</a></code></li>
+<li><code><a title="game.Game.get_current_player" href="#game.Game.get_current_player">get_current_player</a></code></li>
+<li><code><a title="game.Game.get_score_1" href="#game.Game.get_score_1">get_score_1</a></code></li>
+<li><code><a title="game.Game.get_score_2" href="#game.Game.get_score_2">get_score_2</a></code></li>
+<li><code><a title="game.Game.get_winner" href="#game.Game.get_winner">get_winner</a></code></li>
+<li><code><a title="game.Game.get_winning_score" href="#game.Game.get_winning_score">get_winning_score</a></code></li>
+<li><code><a title="game.Game.has_won" href="#game.Game.has_won">has_won</a></code></li>
+<li><code><a title="game.Game.increment_and_determine" href="#game.Game.increment_and_determine">increment_and_determine</a></code></li>
+<li><code><a title="game.Game.play_computer_turn" href="#game.Game.play_computer_turn">play_computer_turn</a></code></li>
+<li><code><a title="game.Game.prompt" href="#game.Game.prompt">prompt</a></code></li>
+<li><code><a title="game.Game.roll_dice" href="#game.Game.roll_dice">roll_dice</a></code></li>
+<li><code><a title="game.Game.set_score" href="#game.Game.set_score">set_score</a></code></li>
+<li><code><a title="game.Game.start" href="#game.Game.start">start</a></code></li>
+<li><code><a title="game.Game.update_highscores" href="#game.Game.update_highscores">update_highscores</a></code></li>
+<li><code><a title="game.Game.winner" href="#game.Game.winner">winner</a></code></li>
 </ul>
 </li>
 </ul>
