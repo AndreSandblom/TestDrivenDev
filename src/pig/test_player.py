@@ -1,4 +1,5 @@
 """This module contains unit tests for the Player class."""
+
 import unittest
 from player import Player
 
@@ -83,11 +84,11 @@ class TestPlayer(unittest.TestCase):
         """Test if the players can get their scores."""
         self.assertEqual(
             self.player1.get_player_score(),
-            "Player: Player1\nAmount of games: 0\nAmount of won games: 0\n"
+            "Player: Player1\nAmount of games: 0\nAmount of won games: 0\n",
         )
         self.assertEqual(
             self.player2.get_player_score(),
-            "Player: Player2\nAmount of games: 0\nAmount of won games: 0\n"
+            "Player: Player2\nAmount of games: 0\nAmount of won games: 0\n",
         )
 
 

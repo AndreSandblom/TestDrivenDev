@@ -1,3 +1,4 @@
+"""The difficulty menu module for the single player mode."""
 import os
 import cmd
 import textwrap
@@ -10,7 +11,7 @@ LEFT_PADDING = 25
 
 
 class DifficultyMenu(cmd.Cmd):
-
+    """The difficulty menu for the single player mode."""""
     def __init__(self, mode_menu, exit_menu):
         super().__init__()
         self.mode_menu = mode_menu
@@ -22,21 +23,25 @@ class DifficultyMenu(cmd.Cmd):
         >>> """)
 
     def do_easy(self, arg):
+        """Start a single player game with easy difficulty."""
         self.difficulty = "easy"
         game = self.create_game(self.difficulty)
         game.cmdloop(game.start(game.player1, game.player2))
 
     def do_normal(self, arg):
+        """Start a single player game with normal difficulty."""
         self.difficulty = "normal"
         game = self.create_game(self.difficulty)
         game.cmdloop(game.start(game.player1, game.player2))
 
     def do_hard(self, arg):
+        """Start a single player game with hard difficulty."""
         self.difficulty = "hard"
         game = self.create_game(self.difficulty)
         game.cmdloop(game.start(game.player1, game.player2))
 
     def do_back(self, arg):
+        """Go back to the main menu."""
         self.clear_terminal()
         print(self.mode_menu)
         return True, arg
@@ -79,6 +84,7 @@ class DifficultyMenu(cmd.Cmd):
         return difficulty_menu
 
     def create_game(self, difficulty):
+        """Create a new game instance."""
         player1 = Player(input("Enter the player's name >>> ").capitalize())
         bot = Intelligence(difficulty)
 

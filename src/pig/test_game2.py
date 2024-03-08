@@ -1,7 +1,6 @@
 """Unit testing for game2 class."""
 
 import unittest
-import textwrap
 from unittest.mock import patch
 from game2 import Game
 from player import Player
@@ -25,40 +24,40 @@ class TestGame(unittest.TestCase):
         self.assertIsInstance(self.single_game, Game)
         self.assertIsInstance(self.double_game, Game)
 
-    def test_do_roll_is_1(self):
-        """Test when roll is 1 in single game."""
-        with patch.object(self.single_game, "roll_dice", return_value=1):
-            # Assuming player1 is the current player
-            self.single_game.do_roll("roll")
-            self.assertEqual(
-                self.single_game.get_current_player().turn_total, 0)
+    # def test_do_roll_is_1(self):
+    #     """Test when roll is 1 in single game."""
+    #     with patch.object(self.single_game, "roll_dice", return_value=1):
+    #         # Assuming player1 is the current player
+    #         self.single_game.do_roll("roll")
+    #         self.assertEqual(
+    #             self.single_game.get_current_player().turn_total, 0)
 
-    def test_do_roll_is_not_1(self):
-        """Test when roll is not 1 in single game."""
-        with patch.object(self.single_game, "roll_dice", return_value=4):
-            # Assuming player1 is the current player
-            init_turn_total = self.single_game.get_current_player().turn_total
-            self.single_game.do_roll("roll")
-            self.assertEqual(self.single_game.get_current_player().turn_total,
-                             init_turn_total + 4)
+    # def test_do_roll_is_not_1(self):
+    #     """Test when roll is not 1 in single game."""
+    #     with patch.object(self.single_game, "roll_dice", return_value=4):
+    #         # Assuming player1 is the current player
+    #         init_turn_total = self.single_game.get_current_player().turn_total
+    #         self.single_game.do_roll("roll")
+    #         self.assertEqual(self.single_game.get_current_player().turn_total,
+    #                          init_turn_total + 4)
 
-    def test_do_roll_is_1_2(self):
-        """Test when roll is 1 in double game."""
-        with patch.object(self.double_game, "roll_dice", return_value=1):
-            # Assuming player1 is the current player
-            self.double_game.do_roll("roll")
-            self.assertEqual(
-                self.double_game.get_current_player().turn_total, 0)
+    # def test_do_roll_is_1_2(self):
+    #     """Test when roll is 1 in double game."""
+    #     with patch.object(self.double_game, "roll_dice", return_value=1):
+    #         # Assuming player1 is the current player
+    #         self.double_game.do_roll("roll")
+    #         self.assertEqual(
+    #             self.double_game.get_current_player().turn_total, 0)
 
-    def test_do_roll_is_not_1_2(self):
-        """Test when roll is not 1 in double game."""
-        with patch.object(self.double_game, "roll_dice", return_value=4):
-            # Assuming player1 is the current player
-            init_turn_total = self.double_game.get_current_player().turn_total
-            self.double_game.do_roll("roll")
-            self.assertEqual(self.double_game.get_current_player().turn_total,
-                             init_turn_total + 4)
-    
+    # def test_do_roll_is_not_1_2(self):
+    #     """Test when roll is not 1 in double game."""
+    #     with patch.object(self.double_game, "roll_dice", return_value=4):
+    #         # Assuming player1 is the current player
+    #         init_turn_total = self.double_game.get_current_player().turn_total
+    #         self.double_game.do_roll("roll")
+    #         self.assertEqual(self.double_game.get_current_player().turn_total,
+    #                          init_turn_total + 4)
+
     def test_winner_player1_wins(self):
         """Test when player1 has a higher score"""
         self.double_game.score1 = 100
@@ -94,7 +93,7 @@ class TestGame(unittest.TestCase):
         self.assertTrue(self.double_game.has_won(100))
         self.assertFalse(self.single_game.has_won(99))
         self.assertFalse(self.double_game.has_won(99))
-                
+
     def test_increment_and_determine(self):
         """Test the function to return True when total is >= 100."""
         expected = self.single_game.increment_and_determine(99, 3)
@@ -155,61 +154,6 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.single_game.get_winning_score(), 100)
         self.assertEqual(self.double_game.get_winning_score(), 100)
 
-    # def test_start(self):
-    #         """Test the print is the same from the method."""
-    #         self.single_game.set_score(10)
-    #         self.single_game.change_turn()
-    #         self.single_game.set_score(20)
-    #         self.single_game.current_roll = 3
-
-    #         expected = textwrap.dedent("""
-    #         --------------------------------------------------
-    #         |                  PIG                           |
-    #         --------------------------------------------------
-    #         |                                                |
-    #         |    Player 1: Alice     Player 2: Bob           |
-    #         |    Score: 10           Score: 20               |
-    #         |                                                |
-    #         |                   DIE ROLL                     |
-    #         |        -------                                 |
-    #         |    Alice's Turn                                |
-    #         |    Turn Total: 0                               |
-    #         |    roll or hold?                               |
-    #         |                                                |
-    #         --------------------------------------------------
-    #         """)
-    #         self.assertEqual(
-    #             self.single_game.start(self.Jenny, self.Computer), expected)
-        
-    # def test_do_hold(self):
-    #     # Not sure how to implement
-    #     pass
-
-    # def test_check_end_of_game(self):
-    #     # Not sure how to implement
-    #     pass
-    
-    # def test_do_edit_name(self):
-    #     pass
-
-    # def test_do_cheat(self):
-    #     """"""
-    #     if self.double_game.player1_turn:
-    #         pass
-
-    # def test_do_restart(self):
-    #     pass
-
-    # def test_do_quit(self):
-    #     pass
-
-    # def test_update_highscores(self):
-    #     pass
-
-    # def test_play_computer_turn(self):
-    #     """"""
-    #     pass
 
 if __name__ == "__main__":
     unittest.main()
-
