@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>main_menu API documentation</title>
-<meta name="description" content="Main module for the game PIG" />
+<meta name="description" content="Main module for the game PIG." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,12 +22,12 @@
 <h1 class="title">Module <code>main_menu</code></h1>
 </header>
 <section id="section-intro">
-<p>Main module for the game PIG</p>
+<p>Main module for the game PIG.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;Main module for the game PIG&#34;&#34;&#34;
+<pre><code class="python">&#34;&#34;&#34;Main module for the game PIG.&#34;&#34;&#34;
 import os
 import sys
 import cmd
@@ -41,6 +41,7 @@ LEFT_PADDING = 23
 
 class MainMenu(cmd.Cmd):
     &#34;&#34;&#34;The main menu for the game.&#34;&#34;&#34;
+
     prompt = textwrap.dedent(&#34;&#34;&#34;\
         Type a valid command or &#39;help&#39; to see the existing commands.
         &gt;&gt;&gt; &#34;&#34;&#34;)
@@ -70,7 +71,6 @@ class MainMenu(cmd.Cmd):
 
     def clear_terminal(self):
         &#34;&#34;&#34;Clear the terminal.&#34;&#34;&#34;
-
         if os.name == &#39;nt&#39;:
             # For Windows
             _ = os.system(&#39;cls&#39;)
@@ -80,7 +80,6 @@ class MainMenu(cmd.Cmd):
 
     def display_main_menu(self):
         &#34;&#34;&#34;Display the main menu of the game.&#34;&#34;&#34;
-
         self.clear_terminal()
 
         main_menu = textwrap.dedent(f&#34;&#34;&#34;
@@ -214,6 +213,7 @@ sys.stdin and sys.stdout are used.</p></div>
 </summary>
 <pre><code class="python">class MainMenu(cmd.Cmd):
     &#34;&#34;&#34;The main menu for the game.&#34;&#34;&#34;
+
     prompt = textwrap.dedent(&#34;&#34;&#34;\
         Type a valid command or &#39;help&#39; to see the existing commands.
         &gt;&gt;&gt; &#34;&#34;&#34;)
@@ -243,7 +243,6 @@ sys.stdin and sys.stdout are used.</p></div>
 
     def clear_terminal(self):
         &#34;&#34;&#34;Clear the terminal.&#34;&#34;&#34;
-
         if os.name == &#39;nt&#39;:
             # For Windows
             _ = os.system(&#39;cls&#39;)
@@ -253,7 +252,6 @@ sys.stdin and sys.stdout are used.</p></div>
 
     def display_main_menu(self):
         &#34;&#34;&#34;Display the main menu of the game.&#34;&#34;&#34;
-
         self.clear_terminal()
 
         main_menu = textwrap.dedent(f&#34;&#34;&#34;
@@ -381,7 +379,6 @@ sys.stdin and sys.stdout are used.</p></div>
 </summary>
 <pre><code class="python">def clear_terminal(self):
     &#34;&#34;&#34;Clear the terminal.&#34;&#34;&#34;
-
     if os.name == &#39;nt&#39;:
         # For Windows
         _ = os.system(&#39;cls&#39;)
@@ -446,7 +443,6 @@ sys.stdin and sys.stdout are used.</p></div>
 </summary>
 <pre><code class="python">def display_main_menu(self):
     &#34;&#34;&#34;Display the main menu of the game.&#34;&#34;&#34;
-
     self.clear_terminal()
 
     main_menu = textwrap.dedent(f&#34;&#34;&#34;

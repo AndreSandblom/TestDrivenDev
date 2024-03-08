@@ -1,4 +1,4 @@
-"""Main module for the game PIG"""
+"""Main module for the game PIG."""
 import os
 import sys
 import cmd
@@ -12,6 +12,7 @@ LEFT_PADDING = 23
 
 class MainMenu(cmd.Cmd):
     """The main menu for the game."""
+
     prompt = textwrap.dedent("""\
         Type a valid command or 'help' to see the existing commands.
         >>> """)
@@ -41,7 +42,6 @@ class MainMenu(cmd.Cmd):
 
     def clear_terminal(self):
         """Clear the terminal."""
-
         if os.name == 'nt':
             # For Windows
             _ = os.system('cls')
@@ -51,7 +51,6 @@ class MainMenu(cmd.Cmd):
 
     def display_main_menu(self):
         """Display the main menu of the game."""
-
         self.clear_terminal()
 
         main_menu = textwrap.dedent(f"""

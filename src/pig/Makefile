@@ -99,19 +99,19 @@ pydoc:
 	@$(call MESSAGE,$@)
 	# This does not work on Windows installed Python
 	$(PYTHON) -m pydoc -w "$(PWD)"
-	install -d doc/pydoc
-	mv *.html doc/pydoc
+	install -d doc/api
+	mv *.html doc/api
 
 pdoc:
 	@$(call MESSAGE,$@)
-	pdoc --force --html --output-dir doc/pdoc *.py
+	pdoc --force --html --output-dir doc/api *.py
 
 pyreverse:
 	@$(call MESSAGE,$@)
-	install -d doc/pyreverse
+	install -d doc/uml
 	pyreverse *.py
-	dot -Tpng classes.dot -o doc/pyreverse/classes.png
-	dot -Tpng packages.dot -o doc/pyreverse/packages.png
+	dot -Tpng classes.dot -o doc/uml/classes.png
+	dot -Tpng packages.dot -o doc/uml/packages.png
 	rm -f classes.dot packages.dot
 
 doc: pdoc pyreverse #pydoc sphinx
