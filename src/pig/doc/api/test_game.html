@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>test_game2 API documentation</title>
+<title>test_game API documentation</title>
 <meta name="description" content="Unit testing for game2 class." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>test_game2</code></h1>
+<h1 class="title">Module <code>test_game</code></h1>
 </header>
 <section id="section-intro">
 <p>Unit testing for game2 class.</p>
@@ -30,8 +30,7 @@
 <pre><code class="python">&#34;&#34;&#34;Unit testing for game2 class.&#34;&#34;&#34;
 
 import unittest
-from unittest.mock import patch
-from game2 import Game
+from game import Game
 from player import Player
 from intelligence import Intelligence
 
@@ -52,40 +51,6 @@ class TestGame(unittest.TestCase):
         &#34;&#34;&#34;Test if the games are instances of Game class.&#34;&#34;&#34;
         self.assertIsInstance(self.single_game, Game)
         self.assertIsInstance(self.double_game, Game)
-
-    # def test_do_roll_is_1(self):
-    #     &#34;&#34;&#34;Test when roll is 1 in single game.&#34;&#34;&#34;
-    #     with patch.object(self.single_game, &#34;roll_dice&#34;, return_value=1):
-    #         # Assuming player1 is the current player
-    #         self.single_game.do_roll(&#34;roll&#34;)
-    #         self.assertEqual(
-    #             self.single_game.get_current_player().turn_total, 0)
-
-    # def test_do_roll_is_not_1(self):
-    #     &#34;&#34;&#34;Test when roll is not 1 in single game.&#34;&#34;&#34;
-    #     with patch.object(self.single_game, &#34;roll_dice&#34;, return_value=4):
-    #         # Assuming player1 is the current player
-    #         init_turn_total = self.single_game.get_current_player().turn_total
-    #         self.single_game.do_roll(&#34;roll&#34;)
-    #         self.assertEqual(self.single_game.get_current_player().turn_total,
-    #                          init_turn_total + 4)
-
-    # def test_do_roll_is_1_2(self):
-    #     &#34;&#34;&#34;Test when roll is 1 in double game.&#34;&#34;&#34;
-    #     with patch.object(self.double_game, &#34;roll_dice&#34;, return_value=1):
-    #         # Assuming player1 is the current player
-    #         self.double_game.do_roll(&#34;roll&#34;)
-    #         self.assertEqual(
-    #             self.double_game.get_current_player().turn_total, 0)
-
-    # def test_do_roll_is_not_1_2(self):
-    #     &#34;&#34;&#34;Test when roll is not 1 in double game.&#34;&#34;&#34;
-    #     with patch.object(self.double_game, &#34;roll_dice&#34;, return_value=4):
-    #         # Assuming player1 is the current player
-    #         init_turn_total = self.double_game.get_current_player().turn_total
-    #         self.double_game.do_roll(&#34;roll&#34;)
-    #         self.assertEqual(self.double_game.get_current_player().turn_total,
-    #                          init_turn_total + 4)
 
     def test_winner_player1_wins(self):
         &#34;&#34;&#34;Test when player1 has a higher score&#34;&#34;&#34;
@@ -197,7 +162,7 @@ if __name__ == &#34;__main__&#34;:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="test_game2.TestGame"><code class="flex name class">
+<dt id="test_game.TestGame"><code class="flex name class">
 <span>class <span class="ident">TestGame</span></span>
 <span>(</span><span>methodName='runTest')</span>
 </code></dt>
@@ -226,40 +191,6 @@ not have a method with the specified name.</p></div>
         &#34;&#34;&#34;Test if the games are instances of Game class.&#34;&#34;&#34;
         self.assertIsInstance(self.single_game, Game)
         self.assertIsInstance(self.double_game, Game)
-
-    # def test_do_roll_is_1(self):
-    #     &#34;&#34;&#34;Test when roll is 1 in single game.&#34;&#34;&#34;
-    #     with patch.object(self.single_game, &#34;roll_dice&#34;, return_value=1):
-    #         # Assuming player1 is the current player
-    #         self.single_game.do_roll(&#34;roll&#34;)
-    #         self.assertEqual(
-    #             self.single_game.get_current_player().turn_total, 0)
-
-    # def test_do_roll_is_not_1(self):
-    #     &#34;&#34;&#34;Test when roll is not 1 in single game.&#34;&#34;&#34;
-    #     with patch.object(self.single_game, &#34;roll_dice&#34;, return_value=4):
-    #         # Assuming player1 is the current player
-    #         init_turn_total = self.single_game.get_current_player().turn_total
-    #         self.single_game.do_roll(&#34;roll&#34;)
-    #         self.assertEqual(self.single_game.get_current_player().turn_total,
-    #                          init_turn_total + 4)
-
-    # def test_do_roll_is_1_2(self):
-    #     &#34;&#34;&#34;Test when roll is 1 in double game.&#34;&#34;&#34;
-    #     with patch.object(self.double_game, &#34;roll_dice&#34;, return_value=1):
-    #         # Assuming player1 is the current player
-    #         self.double_game.do_roll(&#34;roll&#34;)
-    #         self.assertEqual(
-    #             self.double_game.get_current_player().turn_total, 0)
-
-    # def test_do_roll_is_not_1_2(self):
-    #     &#34;&#34;&#34;Test when roll is not 1 in double game.&#34;&#34;&#34;
-    #     with patch.object(self.double_game, &#34;roll_dice&#34;, return_value=4):
-    #         # Assuming player1 is the current player
-    #         init_turn_total = self.double_game.get_current_player().turn_total
-    #         self.double_game.do_roll(&#34;roll&#34;)
-    #         self.assertEqual(self.double_game.get_current_player().turn_total,
-    #                          init_turn_total + 4)
 
     def test_winner_player1_wins(self):
         &#34;&#34;&#34;Test when player1 has a higher score&#34;&#34;&#34;
@@ -363,7 +294,7 @@ not have a method with the specified name.</p></div>
 </ul>
 <h3>Methods</h3>
 <dl>
-<dt id="test_game2.TestGame.setUp"><code class="name flex">
+<dt id="test_game.TestGame.setUp"><code class="name flex">
 <span>def <span class="ident">setUp</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -382,7 +313,7 @@ not have a method with the specified name.</p></div>
     self.William = self.double_game.player2.get_name()</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test__init__"><code class="name flex">
+<dt id="test_game.TestGame.test__init__"><code class="name flex">
 <span>def <span class="ident">test__init__</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -397,7 +328,7 @@ not have a method with the specified name.</p></div>
     self.assertIsInstance(self.double_game, Game)</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_change_turn"><code class="name flex">
+<dt id="test_game.TestGame.test_change_turn"><code class="name flex">
 <span>def <span class="ident">test_change_turn</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -412,7 +343,7 @@ not have a method with the specified name.</p></div>
     self.assertFalse(self.single_game.player1_turn)</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_cheat"><code class="name flex">
+<dt id="test_game.TestGame.test_cheat"><code class="name flex">
 <span>def <span class="ident">test_cheat</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -431,7 +362,7 @@ not have a method with the specified name.</p></div>
         self.assertEqual(self.single_game.score2, 50)</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_get_current_player"><code class="name flex">
+<dt id="test_game.TestGame.test_get_current_player"><code class="name flex">
 <span>def <span class="ident">test_get_current_player</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -446,7 +377,7 @@ not have a method with the specified name.</p></div>
         self.single_game.get_current_player(), self.single_game.player1)</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_get_score"><code class="name flex">
+<dt id="test_game.TestGame.test_get_score"><code class="name flex">
 <span>def <span class="ident">test_get_score</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -465,7 +396,7 @@ not have a method with the specified name.</p></div>
     self.assertEqual(default_0, 0)</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_get_winner_game_not_over"><code class="name flex">
+<dt id="test_game.TestGame.test_get_winner_game_not_over"><code class="name flex">
 <span>def <span class="ident">test_get_winner_game_not_over</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -481,7 +412,7 @@ not have a method with the specified name.</p></div>
     self.assertEqual(winner_table, {})  # Winner table should be empty</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_get_winner_game_over"><code class="name flex">
+<dt id="test_game.TestGame.test_get_winner_game_over"><code class="name flex">
 <span>def <span class="ident">test_get_winner_game_over</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -498,7 +429,7 @@ not have a method with the specified name.</p></div>
     self.assertNotEqual(winner_table, {})</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_get_winning_score"><code class="name flex">
+<dt id="test_game.TestGame.test_get_winning_score"><code class="name flex">
 <span>def <span class="ident">test_get_winning_score</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -513,7 +444,7 @@ not have a method with the specified name.</p></div>
     self.assertEqual(self.double_game.get_winning_score(), 100)</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_has_won"><code class="name flex">
+<dt id="test_game.TestGame.test_has_won"><code class="name flex">
 <span>def <span class="ident">test_has_won</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -530,7 +461,7 @@ not have a method with the specified name.</p></div>
     self.assertFalse(self.double_game.has_won(99))</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_increment_and_determine"><code class="name flex">
+<dt id="test_game.TestGame.test_increment_and_determine"><code class="name flex">
 <span>def <span class="ident">test_increment_and_determine</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -549,7 +480,7 @@ not have a method with the specified name.</p></div>
     self.assertFalse(expected)</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_roll_dice"><code class="name flex">
+<dt id="test_game.TestGame.test_roll_dice"><code class="name flex">
 <span>def <span class="ident">test_roll_dice</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -568,7 +499,7 @@ not have a method with the specified name.</p></div>
     self.assertTrue(expected)</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_set_score"><code class="name flex">
+<dt id="test_game.TestGame.test_set_score"><code class="name flex">
 <span>def <span class="ident">test_set_score</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -587,7 +518,7 @@ not have a method with the specified name.</p></div>
         self.assertEqual(self.single_game.score2, 20)</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_winner_player1_wins"><code class="name flex">
+<dt id="test_game.TestGame.test_winner_player1_wins"><code class="name flex">
 <span>def <span class="ident">test_winner_player1_wins</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -605,7 +536,7 @@ not have a method with the specified name.</p></div>
     self.assertEqual(winner_table[&#34;score&#34;], self.double_game.score1)</code></pre>
 </details>
 </dd>
-<dt id="test_game2.TestGame.test_winner_player2_wins"><code class="name flex">
+<dt id="test_game.TestGame.test_winner_player2_wins"><code class="name flex">
 <span>def <span class="ident">test_winner_player2_wins</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -637,23 +568,23 @@ not have a method with the specified name.</p></div>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="test_game2.TestGame" href="#test_game2.TestGame">TestGame</a></code></h4>
+<h4><code><a title="test_game.TestGame" href="#test_game.TestGame">TestGame</a></code></h4>
 <ul class="">
-<li><code><a title="test_game2.TestGame.setUp" href="#test_game2.TestGame.setUp">setUp</a></code></li>
-<li><code><a title="test_game2.TestGame.test__init__" href="#test_game2.TestGame.test__init__">test__init__</a></code></li>
-<li><code><a title="test_game2.TestGame.test_change_turn" href="#test_game2.TestGame.test_change_turn">test_change_turn</a></code></li>
-<li><code><a title="test_game2.TestGame.test_cheat" href="#test_game2.TestGame.test_cheat">test_cheat</a></code></li>
-<li><code><a title="test_game2.TestGame.test_get_current_player" href="#test_game2.TestGame.test_get_current_player">test_get_current_player</a></code></li>
-<li><code><a title="test_game2.TestGame.test_get_score" href="#test_game2.TestGame.test_get_score">test_get_score</a></code></li>
-<li><code><a title="test_game2.TestGame.test_get_winner_game_not_over" href="#test_game2.TestGame.test_get_winner_game_not_over">test_get_winner_game_not_over</a></code></li>
-<li><code><a title="test_game2.TestGame.test_get_winner_game_over" href="#test_game2.TestGame.test_get_winner_game_over">test_get_winner_game_over</a></code></li>
-<li><code><a title="test_game2.TestGame.test_get_winning_score" href="#test_game2.TestGame.test_get_winning_score">test_get_winning_score</a></code></li>
-<li><code><a title="test_game2.TestGame.test_has_won" href="#test_game2.TestGame.test_has_won">test_has_won</a></code></li>
-<li><code><a title="test_game2.TestGame.test_increment_and_determine" href="#test_game2.TestGame.test_increment_and_determine">test_increment_and_determine</a></code></li>
-<li><code><a title="test_game2.TestGame.test_roll_dice" href="#test_game2.TestGame.test_roll_dice">test_roll_dice</a></code></li>
-<li><code><a title="test_game2.TestGame.test_set_score" href="#test_game2.TestGame.test_set_score">test_set_score</a></code></li>
-<li><code><a title="test_game2.TestGame.test_winner_player1_wins" href="#test_game2.TestGame.test_winner_player1_wins">test_winner_player1_wins</a></code></li>
-<li><code><a title="test_game2.TestGame.test_winner_player2_wins" href="#test_game2.TestGame.test_winner_player2_wins">test_winner_player2_wins</a></code></li>
+<li><code><a title="test_game.TestGame.setUp" href="#test_game.TestGame.setUp">setUp</a></code></li>
+<li><code><a title="test_game.TestGame.test__init__" href="#test_game.TestGame.test__init__">test__init__</a></code></li>
+<li><code><a title="test_game.TestGame.test_change_turn" href="#test_game.TestGame.test_change_turn">test_change_turn</a></code></li>
+<li><code><a title="test_game.TestGame.test_cheat" href="#test_game.TestGame.test_cheat">test_cheat</a></code></li>
+<li><code><a title="test_game.TestGame.test_get_current_player" href="#test_game.TestGame.test_get_current_player">test_get_current_player</a></code></li>
+<li><code><a title="test_game.TestGame.test_get_score" href="#test_game.TestGame.test_get_score">test_get_score</a></code></li>
+<li><code><a title="test_game.TestGame.test_get_winner_game_not_over" href="#test_game.TestGame.test_get_winner_game_not_over">test_get_winner_game_not_over</a></code></li>
+<li><code><a title="test_game.TestGame.test_get_winner_game_over" href="#test_game.TestGame.test_get_winner_game_over">test_get_winner_game_over</a></code></li>
+<li><code><a title="test_game.TestGame.test_get_winning_score" href="#test_game.TestGame.test_get_winning_score">test_get_winning_score</a></code></li>
+<li><code><a title="test_game.TestGame.test_has_won" href="#test_game.TestGame.test_has_won">test_has_won</a></code></li>
+<li><code><a title="test_game.TestGame.test_increment_and_determine" href="#test_game.TestGame.test_increment_and_determine">test_increment_and_determine</a></code></li>
+<li><code><a title="test_game.TestGame.test_roll_dice" href="#test_game.TestGame.test_roll_dice">test_roll_dice</a></code></li>
+<li><code><a title="test_game.TestGame.test_set_score" href="#test_game.TestGame.test_set_score">test_set_score</a></code></li>
+<li><code><a title="test_game.TestGame.test_winner_player1_wins" href="#test_game.TestGame.test_winner_player1_wins">test_winner_player1_wins</a></code></li>
+<li><code><a title="test_game.TestGame.test_winner_player2_wins" href="#test_game.TestGame.test_winner_player2_wins">test_winner_player2_wins</a></code></li>
 </ul>
 </li>
 </ul>
